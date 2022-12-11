@@ -8,8 +8,13 @@ Msn3: string "[ 2 ] Jogar MultiPlayer Local"
 Msn4: string "[ 0 ] Sair"
 Msn5: string "P L A Y E R  1   V E N C E U !!!"
 Msn6: string "P L A Y E R  2   V E N C E U !!!"
+Msn7: string "G A M E   O V E R"
 
 Letra: var #1		; Contem a letra que foi digitada
+
+Kills: var #1
+Cont_Deaths: var #1
+
 
 dirNave: var #1
 dirTiro1: var #1     ;  0 = vertical   |  1 = horizontal
@@ -27,6 +32,29 @@ posAntNave2: var #1
 posAlien: var #1		; Contem a posicao atual do Alien
 posAntAlien: var #1		; Contem a posicao anterior do Alien
 
+
+Alien1Dead: var #1
+desAlien1: var #1
+posAlien1: var #1
+posAntAlien1: var #1
+
+Alien2Dead: var #1
+desAlien2: var #1
+posAlien2: var #1
+posAntAlien2: var #1
+
+Alien3Dead: var #1
+desAlien3: var #1
+posAlien3: var #1
+posAntAlien3: var #1
+
+Alien4Dead: var #1
+desAlien4: var #1
+posAlien4: var #1
+posAntAlien4: var #1
+
+
+
 posTiro: var #1			; Contem a posicao atual do Tiro
 posAntTiro: var #1		; Contem a posicao anterior do Tiro
 posTiro2: var #1			; Contem a posicao atual do Tiro
@@ -36,6 +64,7 @@ posAntTiro3: var #1   ; Contem a posicao anterior do Tiro
 FlagTiro: var #1		; Flag para ver se Atirou ou nao (Barra de Espaco!!)
 FlagTiro2: var #1
 FlagTiro3: var #1
+
 
 
 IncRand: var #1			; Incremento para circular na Tabela de nr. Randomicos
@@ -148,13 +177,41 @@ main:
 	store posAntTiro3, R0	; Zera Posicao Anterior do Tiro
 	
 	
-	Loadn R0, #100
-	store posAlien, R0		; Zera Posicao Atual do Alien
-	store posAntAlien, R0	; Zera Posicao Anterior do Alien
+	loadn r0, #19
+	store posAlien1, r0
+	store posAntAlien1, r0
+	
+	loadn r0, #600
+	store posAlien2, r0
+	store posAntAlien2, r0
+	
+	loadn r0, #639
+	store posAlien3, r0
+	store posAntAlien3, r0
+	
+	loadn r0, #1179
+	store posAlien4, r0
+	store posAntAlien4, r0
+	
 	
 	Loadn R0, #0			; Contador para os Mods	= 0
 	loadn R2, #0			; Para verificar se (mod(c/10)==0
+	
+	store Kills, r0
+	store Cont_Deaths, r0	
+		
 	store dirNave, R0
+	store desAlien1, r0
+	store Alien1Dead, r0
+	
+	store desAlien2, r0
+	store Alien2Dead, r0
+	
+	store desAlien3, r0
+	store Alien3Dead, r0
+	
+	store desAlien4, r0
+	store Alien4Dead, r0
 	
 	store dirTiro1, R0   ;começa na vertical
 	store dirTiro2, R0
@@ -164,20 +221,42 @@ main:
 	store dirTiro2_Recalculapos, R0
 	store dirTiro3_Recalculapos, R0
 	
-	call MoveAlien_Desenha
+	call MoveAlien1_Desenha
+	call MoveAlien2_Desenha
+	call MoveAlien3_Desenha
+	call MoveAlien4_Desenha
 	call MoveNave_Desenha
 	
 	Loop:
 	
-		loadn R1, #5    ;padrao eh 10
+		loadn R1, #1    ;padrao eh 10
 		mod R1, R0, R1
 		cmp R1, R2		; if (mod(c/10)==0
 		ceq MoveNave	; Chama Rotina de movimentacao da Nave
 	
-		loadn R1, #7   ;padrao eh 30
+		
+		
+		loadn R1, #4   ;padrao eh 30
 		mod R1, R0, R1
 		cmp R1, R2		; if (mod(c/30)==0
-		ceq MoveAlien	; Chama Rotina de movimentacao do Alien
+		ceq MoveAlien1	; Chama Rotina de movimentacao do Alien
+		
+		loadn R1, #3   ;padrao eh 30
+		mod R1, R0, R1
+		cmp R1, R2		; if (mod(c/30)==0
+		ceq MoveAlien2	; Chama Rotina de movimentacao do Alien
+		
+		loadn R1, #2   ;padrao eh 30
+		mod R1, R0, R1
+		cmp R1, R2		; if (mod(c/30)==0
+		ceq MoveAlien3	; Chama Rotina de movimentacao do Alien
+		
+		loadn R1, #4   ;padrao eh 30
+		mod R1, R0, R1
+		cmp R1, R2		; if (mod(c/30)==0
+		ceq MoveAlien4	; Chama Rotina de movimentacao do Alien
+	
+	
 	
 		loadn R1, #1	;padrao eh 2
 		mod R1, R0, R1
@@ -193,6 +272,11 @@ main:
 		mod R1, R0, R1
 		cmp R1, R2		; if (mod(c/2)==0
 		ceq MoveTiro_Tres	; Chama Rotina de movimentacao do Tiro
+		
+		loadn r1, #30
+		mod R1, R0, R1
+		cmp R1, R2		; if (mod(c/2)==0
+		ceq Reviver_Aliens
 	
 		call Delay
 		inc R0 	;c++
@@ -510,7 +594,7 @@ printcarreg5Screen:
 
 
 
-
+;------------------------------------------------------------------------------------
 
 MoveNave:
 	push r0
@@ -1198,33 +1282,43 @@ MoveNave2_Desenha:	; Desenha caractere da Nave
 	pop R0
 	rts
 	
+	
+	
 ;----------------------------------
 ;----------------------------------
 ;----------------------------------
 
-MoveAlien:
+		
+;----------------------------- ALIEN 1 -----------------------------
+MoveAlien1:
 	push r0
 	push r1
 	
-	call MoveAlien_RecalculaPos
+	load r0, Alien1Dead
+	loadn r1, #1
+	cmp r0, r1
+	jeq MoveAlien1_Skip
+	
+	call MoveAlien1_RecalculaPos
 	
 ; So' Apaga e Redezenha se (pos != posAnt)
 ;	If (pos != posAnt)	{	
-	load r0, posAlien
-	load r1, posAntAlien
+	load r0, posAlien1
+	load r1, posAntAlien1
 	cmp r0, r1
-	jeq MoveAlien_Skip
-		call MoveAlien_Apaga
-		call MoveAlien_Desenha		;}
-  MoveAlien_Skip:
+	jeq MoveAlien1_Skip
 	
-	pop r1
-	pop r0
-	rts
-		
-; ----------------------------
-		
-MoveAlien_Apaga:
+	call MoveAlien1_Apaga
+	call MoveAlien1_Desenha		;}
+  	
+  	MoveAlien1_Skip:
+		pop r1
+		pop r0
+		rts
+
+;----------------------------------
+
+MoveAlien1_Apaga:
 	push R0
 	push R1
 	push R2
@@ -1234,170 +1328,705 @@ MoveAlien_Apaga:
 	push R6
 	
 	loadn R6, #2048
-	load R0, posAntAlien	; R0 == posAnt
+	load R0, posAntAlien1	; R0 == posAnt
 	load R1, posAntNave		; R1 = posAnt
 	cmp r0, r1
-	jne MoveAlien_Apaga_Skip
-		loadn r5, #8		; Se o Tiro passa sobre a Nave, apaga com um X, senao apaga com o cenario 
-		add r5, r5, r6
-		jmp MoveAlien_Apaga_Fim
+	jne MoveAlien1_Apaga_Skip
+	
+	loadn r5, #8		; Se o Tiro passa sobre a Nave, apaga com um X, senao apaga com o cenario 
+	add r5, r5, r6
+	jmp MoveAlien1_Apaga_Fim
 
-  MoveAlien_Apaga_Skip:	
+  	MoveAlien1_Apaga_Skip:	
   
-	; --> R2 = Tela1Linha0 + posAnt + posAnt/40  ; tem que somar posAnt/40 no ponteiro pois as linas da string terminam com /0 !!
-	loadn R1, #tela0Linha0	; Endereco onde comeca a primeira linha do cenario!!
-	add R2, R1, r0	; R2 = Tela1Linha0 + posAnt
-	loadn R4, #40
-	div R3, R0, R4	; R3 = posAnt/40
-	add R2, R2, R3	; R2 = Tela1Linha0 + posAnt + posAnt/40
-	
-	loadi R5, R2	; R5 = Char (Tela(posAnt))
+		; --> R2 = Tela1Linha0 + posAnt + posAnt/40  ; tem que somar posAnt/40 no ponteiro pois as linas da string terminam com /0 !!
+		loadn R1, #tela0Linha0	; Endereco onde comeca a primeira linha do cenario!!
+		add R2, R1, r0	; R2 = Tela1Linha0 + posAnt
+		loadn R4, #40
+		div R3, R0, R4	; R3 = posAnt/40
+		add R2, R2, R3	; R2 = Tela1Linha0 + posAnt + posAnt/40
+		
+		loadi R5, R2	; R5 = Char (Tela(posAnt))
   
-  MoveAlien_Apaga_Fim:	
-	outchar R5, R0	; Apaga o Obj na tela com o Char correspondente na memoria do cenario
-	
-	pop R6
-	pop R5
-	pop R4
-	pop R3
-	pop R2
-	pop R1
-	pop R0
-	rts
-;----------------------------------	
-; sorteia nr. randomico entre 0 - 7
-;					switch rand
-;						case 0 : posNova = posAnt -41
-;						case 1 : posNova = posAnt -40
-;						case 2 : posNova = posAnt -39
-;						case 3 : posNova = posAnt -1
-;						case 4 : posNova = posAnt +1
-;						case 5 : posNova = posAnt +39
-;						case 6 : posNova = posAnt +40
-;						case 7 : posNova = posAnt +41
-	
-MoveAlien_RecalculaPos:
+  	MoveAlien1_Apaga_Fim:	
+		outchar R5, R0	; Apaga o Obj na tela com o Char correspondente na memoria do cenario
+		
+		pop R6
+		pop R5
+		pop R4
+		pop R3
+		pop R2
+		pop R1
+		pop R0
+		rts
+
+;----------------------------------
+MoveAlien1_RecalculaPos:
 	push R0
 	push R1
 	push R2
 	push R3
+	push R4
+	push R5
+	push R6
+	push R7
+	
+	load r4, desAlien1
+	loadn r5, #1
+	cmp r4, r5
+	jeq MoveAlien1_RecalculaPos_Volta
+	
+	load r2, FlagTiro
+	loadn r3, #1
+	cmp r2, r3
+	jeq MoveAlien1_RecalculaPos_Desvia
+	
+	jmp MoveAlien1_RecalculaPos_Continua
+	
+	MoveAlien1_RecalculaPos_Desvia:
+		load r0, posAlien1
+		loadn r1, #1
+		add r0, r0, r1
+		store posAlien1, r0
+		loadn r2, #1
+		store desAlien1, r2
+		jmp MoveAlien1_RecalculaPos_Fim
+	
+	MoveAlien1_RecalculaPos_Volta:
+		load r0, posAlien1
+		loadn r1, #1
+		sub r0, r0, r1
+		store posAlien1, r0
+		loadn r2, #0
+		store desAlien1, r2
+		jmp MoveAlien1_RecalculaPos_Fim
+	
+	MoveAlien1_RecalculaPos_Continua:
+		load r0, posAlien1
+		loadn r1, #40
+		add r0, r0, r1
+		store posAlien1, r0
+		jmp MoveAlien1_RecalculaPos_Fim
+	
+	
+	
+	MoveAlien1_RecalculaPos_Fim:
+		
+		pop R7
+		pop R6
+		pop R5
+		pop R4
+		pop R3
+		pop R2
+		pop R1
+		pop R0
+		rts
 
-	load R0, posAlien
+;---------------------------------
 
-; sorteia nr. randomico entre 0 - 7
-	loadn R2, #Rand 	; declara ponteiro para tabela rand na memoria!
-	load R1, IncRand	; Pega Incremento da tabela Rand
-	add r2, r2, r1		; Soma Incremento ao inicio da tabela Rand
-						; R2 = Rand + IncRand
-	loadi R3, R2 		; busca nr. randomico da memoria em R3
-						; R3 = Rand(IncRand)				
-	inc r1				; Incremento ++
-	loadn r2, #30
-	cmp r1, r2			; Compara com o Final da Tabela e re-estarta em 0
-	jne MoveAlien_RecalculaPos_Skip
-		loadn r1, #0		; re-estarta a Tabela Rand em 0
-  MoveAlien_RecalculaPos_Skip:
-	store IncRand, r1	; Salva incremento ++
-
-; Switch Rand (r3)
- ; Case 0 : posAlien = posAlien -41
-	loadn r2, #0
-	cmp r3, r2	; Se Rand = 0
-	jne MoveAlien_RecalculaPos_Case1
-	loadn r1, #41
-	sub r0, r0, r1
-	jmp MoveAlien_RecalculaPos_FimSwitch	; Break do Switch
-
- ; Case 1 : posAlien = posAlien -40
-   MoveAlien_RecalculaPos_Case1:
-	loadn r2, #1
-	cmp r3, r2	; Se Rand = 1
-	jne MoveAlien_RecalculaPos_Case2
-	loadn r1, #40
-	sub r0, r0, r1
-	jmp MoveAlien_RecalculaPos_FimSwitch	; Break do Switch
-
- ; Case 2 : posAlien = posAlien - 39
-   MoveAlien_RecalculaPos_Case2:
-	loadn r2, #2	; Se Rand = 2
-	cmp r3, r2
-	jne MoveAlien_RecalculaPos_Case3
-	loadn r1, #39
-	sub r0, r0, r1
-	jmp MoveAlien_RecalculaPos_FimSwitch	; Break do Switch
-
- ; Case 3 : posAlien = posAlien - 1
-   MoveAlien_RecalculaPos_Case3:
-	loadn r2, #3	; Se Rand = 3
-	cmp r3, r2
-	jne MoveAlien_RecalculaPos_Case4
-	loadn r1, #1
-	sub r0, r0, r1
-	jmp MoveAlien_RecalculaPos_FimSwitch	; Break do Switch
-
- ; Case 4 : posAlien = posAlien + 1	
-   MoveAlien_RecalculaPos_Case4:
-	loadn r2, #4	; Se Rand = 4
-	cmp r3, r2
-	jne MoveAlien_RecalculaPos_Case5
-	loadn r1, #1
-	add r0, r0, r1
-	jmp MoveAlien_RecalculaPos_FimSwitch	; Break do Switch
-
- ; Case 5 : posAlien = posAlien + 39
-   MoveAlien_RecalculaPos_Case5:
-	loadn r2, #5	; Se Rand = 5
-	cmp r3, r2
-	jne MoveAlien_RecalculaPos_Case6
-	loadn r1, #39
-	add r0, r0, r1
-	jmp MoveAlien_RecalculaPos_FimSwitch	; Break do Switch
-
- ; Case 6 : posAlien = posAlien + 40
-   MoveAlien_RecalculaPos_Case6:
-	loadn r2, #6	; Se Rand = 6
-	cmp r3, r2
-	jne MoveAlien_RecalculaPos_Case7
-	loadn r1, #40
-	add r0, r0, r1
-	jmp MoveAlien_RecalculaPos_FimSwitch	; Break do Switch	
-
- ; Case 7 : posAlien = posAlien + 41
-   MoveAlien_RecalculaPos_Case7:
-	loadn r2, #7	; Se Rand = 7
-	cmp r3, r2
-	jne MoveAlien_RecalculaPos_FimSwitch
-	loadn r1, #41
-	add r0, r0, r1
-	;jmp MoveAlien_RecalculaPos_FimSwitch	; Break do Switch	
-
- ; Fim Switch:
-  MoveAlien_RecalculaPos_FimSwitch:	
-	store posAlien, R0	; Grava a posicao alterada na memoria
-	pop R3
-	pop R2
-	pop R1
-	pop R0
-	rts
-
-
-;----------------------------------
-MoveAlien_Desenha:
+MoveAlien1_Desenha:
 	push R0
 	push R1
 	push R2
+	push R3
 	
 	Loadn R1, #9	; Alien
 	loadn R2, #512
 	add R1, R1, R2
-	load R0, posAlien
+	load R0, posAlien1
 	outchar R1, R0
-	store posAntAlien, R0
+	store posAntAlien1, R0
 	
-	pop R2
-	pop R1
-	pop R0
-	rts
+	load r3, posNave
+	cmp r3, r0
+	jne MoveAlien1_Desenha_Fim
+	
+	
+	
+	jmp Game_Over
+	
+	
+		
+	MoveAlien1_Desenha_Fim:
+		pop R3
+		pop R2
+		pop R1
+		pop R0
+		rts
+
+;---------------------------------
+
+;----------------------------- ALIEN 2 -----------------------------
+MoveAlien2:
+	push r0
+	push r1
+	
+	load r0, Alien2Dead
+	loadn r1, #1
+	cmp r0, r1
+	jeq MoveAlien3_Skip
+	
+	call MoveAlien2_RecalculaPos
+	
+; So' Apaga e Redezenha se (pos != posAnt)
+;	If (pos != posAnt)	{	
+	load r0, posAlien2
+	load r1, posAntAlien2
+	cmp r0, r1
+	jeq MoveAlien2_Skip
+	
+	call MoveAlien2_Apaga
+	call MoveAlien2_Desenha		;}
+  	
+  	MoveAlien2_Skip:
+		pop r1
+		pop r0
+		rts
+
+;----------------------------------
+
+MoveAlien2_Apaga:
+	push R0
+	push R1
+	push R2
+	push R3
+	push R4
+	push R5
+	push R6
+	
+	loadn R6, #2048
+	load R0, posAntAlien2	; R0 == posAnt
+	load R1, posAntNave		; R1 = posAnt
+	cmp r0, r1
+	jne MoveAlien2_Apaga_Skip
+	
+	loadn r5, #8		; Se o Tiro passa sobre a Nave, apaga com um X, senao apaga com o cenario 
+	add r5, r5, r6
+	jmp MoveAlien2_Apaga_Fim
+
+  	MoveAlien2_Apaga_Skip:	
+  
+		; --> R2 = Tela1Linha0 + posAnt + posAnt/40  ; tem que somar posAnt/40 no ponteiro pois as linas da string terminam com /0 !!
+		loadn R1, #tela0Linha0	; Endereco onde comeca a primeira linha do cenario!!
+		add R2, R1, r0	; R2 = Tela1Linha0 + posAnt
+		loadn R4, #40
+		div R3, R0, R4	; R3 = posAnt/40
+		add R2, R2, R3	; R2 = Tela1Linha0 + posAnt + posAnt/40
+		
+		loadi R5, R2	; R5 = Char (Tela(posAnt))
+  
+  	MoveAlien2_Apaga_Fim:	
+		outchar R5, R0	; Apaga o Obj na tela com o Char correspondente na memoria do cenario
+		
+		pop R6
+		pop R5
+		pop R4
+		pop R3
+		pop R2
+		pop R1
+		pop R0
+		rts
+
+;----------------------------------
+MoveAlien2_RecalculaPos:
+	push R0
+	push R1
+	push R2
+	push R3
+	push R4
+	push R5
+	push R6
+	push R7
+	
+	load r4, desAlien2
+	loadn r5, #1
+	cmp r4, r5
+	jeq MoveAlien2_RecalculaPos_Volta
+	
+	load r2, FlagTiro
+	loadn r3, #1
+	cmp r2, r3
+	jeq MoveAlien2_RecalculaPos_Desvia
+	
+	jmp MoveAlien2_RecalculaPos_Continua
+	
+	MoveAlien2_RecalculaPos_Desvia:
+		load r0, posAlien2
+		loadn r1, #41
+		add r0, r0, r1
+		store posAlien2, r0
+		loadn r2, #1
+		store desAlien2, r2
+		jmp MoveAlien2_RecalculaPos_Fim
+	
+	MoveAlien2_RecalculaPos_Volta:
+		load r0, posAlien2
+		loadn r1, #40
+		sub r0, r0, r1
+		store posAlien2, r0
+		loadn r2, #0
+		store desAlien2, r2
+		jmp MoveAlien2_RecalculaPos_Fim
+	
+	MoveAlien2_RecalculaPos_Continua:
+		load r0, posAlien2
+		loadn r1, #1
+		add r0, r0, r1
+		store posAlien2, r0
+		jmp MoveAlien2_RecalculaPos_Fim
+	
+	
+	
+	MoveAlien2_RecalculaPos_Fim:
+		
+		pop R7
+		pop R6
+		pop R5
+		pop R4
+		pop R3
+		pop R2
+		pop R1
+		pop R0
+		rts
+		
+;---------------------------------
+
+MoveAlien2_Desenha:
+	push R0
+	push R1
+	push R2
+	
+	Loadn R1, #9	; Alien Azul 
+	loadn R2, #512   ;3072
+	add R1, R1, R2
+	load R0, posAlien2
+	outchar R1, R0
+	store posAntAlien2, R0
+	
+	load r3, posNave
+	cmp r3, r0
+	jne MoveAlien2_Desenha_Fim
+	
+	jmp Game_Over
+	
+	MoveAlien2_Desenha_Fim:
+		pop R2
+		pop R1
+		pop R0
+		rts
+
+
+;----------------------------- ALIEN 3 -----------------------------
+MoveAlien3:
+	push r0
+	push r1
+	
+	load r0, Alien3Dead
+	loadn r1, #1
+	cmp r0, r1
+	jeq MoveAlien3_Skip
+	
+	call MoveAlien3_RecalculaPos
+	
+; So' Apaga e Redezenha se (pos != posAnt)
+;	If (pos != posAnt)	{	
+	load r0, posAlien3
+	load r1, posAntAlien3
+	cmp r0, r1
+	jeq MoveAlien3_Skip
+	
+	call MoveAlien3_Apaga
+	call MoveAlien3_Desenha		;}
+  	
+  	MoveAlien3_Skip:
+		pop r1
+		pop r0
+		rts
+
+;----------------------------------
+
+MoveAlien3_Apaga:
+	push R0
+	push R1
+	push R2
+	push R3
+	push R4
+	push R5
+	push R6
+	
+	loadn R6, #2048
+	load R0, posAntAlien3	; R0 == posAnt
+	load R1, posAntNave		; R1 = posAnt
+	cmp r0, r1
+	jne MoveAlien3_Apaga_Skip
+	
+	loadn r5, #8		; Se o Tiro passa sobre a Nave, apaga com um X, senao apaga com o cenario 
+	add r5, r5, r6
+	jmp MoveAlien3_Apaga_Fim
+
+  	MoveAlien3_Apaga_Skip:	
+  
+		; --> R2 = Tela1Linha0 + posAnt + posAnt/40  ; tem que somar posAnt/40 no ponteiro pois as linas da string terminam com /0 !!
+		loadn R1, #tela0Linha0	; Endereco onde comeca a primeira linha do cenario!!
+		add R2, R1, r0	; R2 = Tela1Linha0 + posAnt
+		loadn R4, #40
+		div R3, R0, R4	; R3 = posAnt/40
+		add R2, R2, R3	; R2 = Tela1Linha0 + posAnt + posAnt/40
+		
+		loadi R5, R2	; R5 = Char (Tela(posAnt))
+  
+  	MoveAlien3_Apaga_Fim:	
+		outchar R5, R0	; Apaga o Obj na tela com o Char correspondente na memoria do cenario
+		
+		pop R6
+		pop R5
+		pop R4
+		pop R3
+		pop R2
+		pop R1
+		pop R0
+		rts
+
+;----------------------------------
+MoveAlien3_RecalculaPos:
+	push R0
+	push R1
+	push R2
+	push R3
+	push R4
+	push R5
+	push R6
+	push R7
+	
+	load r4, desAlien3
+	loadn r5, #1
+	cmp r4, r5
+	jeq MoveAlien3_RecalculaPos_Volta
+	
+	load r2, FlagTiro2
+	loadn r3, #1
+	cmp r2, r3
+	jeq MoveAlien3_RecalculaPos_Desvia
+	
+	jmp MoveAlien3_RecalculaPos_Continua
+	
+	MoveAlien3_RecalculaPos_Desvia:
+		load r0, posAlien3
+		loadn r1, #40
+		sub r0, r0, r1
+		store posAlien3, r0
+		loadn r2, #1
+		store desAlien3, r2
+		jmp MoveAlien3_RecalculaPos_Fim
+	
+	MoveAlien3_RecalculaPos_Volta:
+		load r0, posAlien3
+		loadn r1, #40
+		add r0, r0, r1
+		store posAlien3, r0
+		loadn r2, #0
+		store desAlien3, r2
+		jmp MoveAlien3_RecalculaPos_Fim
+	
+	MoveAlien3_RecalculaPos_Continua:
+		load r0, posAlien3
+		loadn r1, #1
+		sub r0, r0, r1
+		store posAlien3, r0
+		jmp MoveAlien3_RecalculaPos_Fim
+	
+	
+	
+	MoveAlien3_RecalculaPos_Fim:
+		pop R7
+		pop R6
+		pop R5
+		pop R4
+		pop R3
+		pop R2
+		pop R1
+		pop R0
+		rts
+
+;---------------------------------
+
+MoveAlien3_Desenha:
+	push R0
+	push R1
+	push R2
+	
+	Loadn R1, #9	; Alien vermelho
+	loadn R2, #512   ;2304
+	add R1, R1, R2
+	load R0, posAlien3
+	outchar R1, R0
+	store posAntAlien3, R0
+	
+	load r3, posNave
+	cmp r3, r0
+	jne MoveAlien3_Desenha_Fim
+	
+	jmp Game_Over
+	
+	MoveAlien3_Desenha_Fim:
+		pop R2
+		pop R1
+		pop R0
+		rts
+
+
+;----------------------------- ALIEN 4 -----------------------------
+MoveAlien4:
+	push r0
+	push r1
+	
+	load r0, Alien4Dead
+	loadn r1, #1
+	cmp r0, r1
+	jeq MoveAlien4_Skip
+	
+	call MoveAlien4_RecalculaPos
+	
+; So' Apaga e Redezenha se (pos != posAnt)
+;	If (pos != posAnt)	{	
+	load r0, posAlien4
+	load r1, posAntAlien4
+	cmp r0, r1
+	jeq MoveAlien4_Skip
+	
+	call MoveAlien4_Apaga
+	call MoveAlien4_Desenha		;}
+  	
+  	MoveAlien4_Skip:
+		pop r1
+		pop r0
+		rts
+
+;----------------------------------
+
+MoveAlien4_Apaga:
+	push R0
+	push R1
+	push R2
+	push R3
+	push R4
+	push R5
+	push R6
+	
+	loadn R6, #2048
+	load R0, posAntAlien4	; R0 == posAnt
+	load R1, posAntNave		; R1 = posAnt
+	cmp r0, r1
+	jne MoveAlien4_Apaga_Skip
+	
+	loadn r5, #8		; Se o Tiro passa sobre a Nave, apaga com um X, senao apaga com o cenario 
+	add r5, r5, r6
+	jmp MoveAlien4_Apaga_Fim
+
+  	MoveAlien4_Apaga_Skip:	
+  
+		; --> R2 = Tela1Linha0 + posAnt + posAnt/40  ; tem que somar posAnt/40 no ponteiro pois as linas da string terminam com /0 !!
+		loadn R1, #tela0Linha0	; Endereco onde comeca a primeira linha do cenario!!
+		add R2, R1, r0	; R2 = Tela1Linha0 + posAnt
+		loadn R4, #40
+		div R3, R0, R4	; R3 = posAnt/40
+		add R2, R2, R3	; R2 = Tela1Linha0 + posAnt + posAnt/40
+		
+		loadi R5, R2	; R5 = Char (Tela(posAnt))
+  
+  	MoveAlien4_Apaga_Fim:	
+		outchar R5, R0	; Apaga o Obj na tela com o Char correspondente na memoria do cenario
+		
+		pop R6
+		pop R5
+		pop R4
+		pop R3
+		pop R2
+		pop R1
+		pop R0
+		rts
+
+;----------------------------------
+MoveAlien4_RecalculaPos:
+	push R0
+	push R1
+	push R2
+	push R3
+	push R4
+	push R5
+	push R6
+	push R7
+	
+	load r4, desAlien4
+	loadn r5, #1
+	cmp r4, r5
+	jeq MoveAlien4_RecalculaPos_Volta
+	
+	load r2, FlagTiro2
+	loadn r3, #1
+	cmp r2, r3
+	jeq MoveAlien4_RecalculaPos_Desvia
+	
+	jmp MoveAlien4_RecalculaPos_Continua
+	
+	MoveAlien4_RecalculaPos_Desvia:
+		load r0, posAlien4
+		loadn r1, #39
+		sub r0, r0, r1
+		store posAlien4, r0
+		loadn r2, #1
+		store desAlien4, r2
+		jmp MoveAlien4_RecalculaPos_Fim
+	
+	MoveAlien4_RecalculaPos_Volta:
+		load r0, posAlien4
+		loadn r1, #1
+		sub r0, r0, r1
+		store posAlien4, r0
+		loadn r2, #0
+		store desAlien4, r2
+		jmp MoveAlien4_RecalculaPos_Fim
+	
+	MoveAlien4_RecalculaPos_Continua:
+		load r0, posAlien4
+		loadn r1, #40
+		sub r0, r0, r1
+		store posAlien4, r0
+		jmp MoveAlien4_RecalculaPos_Fim
+	
+	
+	
+	MoveAlien4_RecalculaPos_Fim:
+		pop R7
+		pop R6
+		pop R5
+		pop R4
+		pop R3
+		pop R2
+		pop R1
+		pop R0
+		rts
+
+;---------------------------------
+
+MoveAlien4_Desenha:
+	push R0
+	push R1
+	push R2
+	
+	Loadn R1, #9	; Alien Amarelo
+	loadn R2, #512  ;2816
+	add R1, R1, R2
+	load R0, posAlien4
+	outchar R1, R0
+	store posAntAlien4, R0
+	
+	load r3, posNave
+	cmp r3, r0
+	jne MoveAlien4_Desenha_Fim
+	
+	jmp Game_Over
+	
+	MoveAlien4_Desenha_Fim:
+		pop R2
+		pop R1
+		pop R0
+		rts
+		
+		
+;----------------------------------------------------------------------------
+Reviver_Aliens:
+	push r0
+	push r1
+	
+	load r0, Cont_Deaths
+	loadn r1, #4
+	cmp r0, r1
+	jne Reviver_Aliens_Fim
+	
+	
+	call MoveAlien1_Apaga
+	call MoveAlien2_Apaga
+	call MoveAlien3_Apaga
+	call MoveAlien4_Apaga
+	
+	loadn r0, #0
+	store Alien1Dead, r0
+	store Alien2Dead, r0
+	store Alien3Dead, r0
+	store Alien4Dead, r0
+	store Cont_Deaths, r0
+	
+	loadn r0, #19
+	store posAlien1, r0
+	store posAntAlien1, r0
+	
+	loadn r0, #600
+	store posAlien2, r0
+	store posAntAlien2, r0
+	
+	loadn r0, #639
+	store posAlien3, r0
+	store posAntAlien3, r0
+	
+	loadn r0, #1179
+	store posAlien4, r0
+	store posAntAlien4, r0
+	
+	Reviver_Aliens_Fim:
+		pop r1
+		pop r0
+		rts
+
+
+;---------------------------------- GAME-OVER -------------------------------
+Game_Over:	
+	push R0
+	push R1
+	push R2
+	; Limpa a Tela !!
+  	loadn R1, #tela0Linha0	; Endereco onde comeca a primeira linha do cenario!!
+	loadn R2, #0  			; cor branca!
+	call ImprimeTela   		;  Rotina de Impresao de Cenario na Tela Inteira
+  
+	;imprime Voce perdeu !!!
+	loadn r0, #530
+	loadn r1, #Msn7
+	loadn r2, #2304
+	call ImprimeStr
+	
+	;imprime quer jogar novamente
+	loadn r0, #605
+	loadn r1, #Msn1
+	loadn r2, #2304
+	call ImprimeStr
+
+	Game_Over_Loop:	
+		call DigLetra
+		loadn r0, #'n'
+		load r1, Letra
+		cmp r0, r1				; tecla == 'n' ?
+		jeq Game_Over_FimJogo	; tecla e' 'n'
+		
+		loadn r0, #'s'
+		cmp r0, r1				; tecla == 's' ?
+		jne Game_Over_Loop	; tecla nao e' 's'
+	
+	
+	
+	; Se quiser jogar novamente...
+	call ApagaTela
+	
+	pop r2
+	pop r1
+	pop r0
+	pop r0	; Da um Pop a mais para acertar o ponteiro da pilha, pois nao vai dar o RTS !!
+	jmp main
+
+ 	Game_Over_FimJogo:
+		jmp menu
+
+
 
 ;----------------------------------
 ;----------------------------------
@@ -1406,6 +2035,8 @@ MoveAlien_Desenha:
 MoveTiro:
 	push r0
 	push r1
+	push r2
+	push r3
 	
 	call MoveTiro_RecalculaPos
 
@@ -1415,10 +2046,104 @@ MoveTiro:
 	load r1, posAntTiro
 	cmp r0, r1
 	jeq MoveTiro_Skip
+	call MoveTiro_Apaga
+	call MoveTiro_Desenha
+	
+	load r1, posAlien1
+	cmp r0, r1
+	jeq Tiro1_Alien1
+	
+	load r1, posAlien2
+	cmp r0, r1
+	jeq Tiro1_Alien2
+	
+	load r1, posAlien3
+	cmp r0, r1
+	jeq Tiro1_Alien3
+	
+	load r1, posAlien4
+	cmp r0, r1
+	jeq Tiro1_Alien4
+	
+	jmp MoveTiro_Skip
+	
+	Tiro1_Alien1:
+		loadn r1, #1
+		store Alien1Dead, r1
+		loadn r0, #0
+		store FlagTiro, r0
+		store posAlien1, r0
+		
+		load r2, Kills
+		inc r2
+		store Kills, r2
+		
+		load r3, Cont_Deaths
+		inc r3
+		store Cont_Deaths, r3
+		
 		call MoveTiro_Apaga
-		call MoveTiro_Desenha		;}
+		jmp MoveTiro_Skip
+	
+	Tiro1_Alien2:
+		loadn r1, #1
+		store Alien2Dead, r1
+		loadn r0, #0
+		store FlagTiro, r0
+		store posAlien2, r0
+		
+		load r2, Kills
+		inc r2
+		store Kills, r2
+		
+		load r3, Cont_Deaths
+		inc r3
+		store Cont_Deaths, r3
+		
+		call MoveTiro_Apaga
+		jmp MoveTiro_Skip
+		
+	Tiro1_Alien3:
+		loadn r1, #1
+		store Alien3Dead, r1
+		loadn r0, #0
+		store FlagTiro, r0
+		store posAlien3, r0
+		
+		load r2, Kills
+		inc r2
+		store Kills, r2
+		
+		load r3, Cont_Deaths
+		inc r3
+		store Cont_Deaths, r3
+		
+		call MoveTiro_Apaga
+		
+		jmp MoveTiro_Skip
+	
+	Tiro1_Alien4:
+		loadn r1, #1
+		store Alien4Dead, r1
+		loadn r0, #0
+		store FlagTiro, r0
+		store posAlien4, r0
+		
+		load r2, Kills
+		inc r2
+		store Kills, r2
+		
+		load r3, Cont_Deaths
+		inc r3
+		store Cont_Deaths, r3
+		
+		call MoveTiro_Apaga
+		jmp MoveTiro_Skip
+	
   MoveTiro_Skip:
 	
+	pop r3
+	pop r2
 	pop r1
 	pop r0
 	rts
@@ -1427,6 +2152,8 @@ MoveTiro:
 MoveTiro_Dois:
 	push r0
 	push r1
+	push r2
+	push r3
 	
 	call MoveTiro_RecalculaPos_Dois
 
@@ -1435,11 +2162,105 @@ MoveTiro_Dois:
 	load r0, posTiro2
 	load r1, posAntTiro2
 	cmp r0, r1
-	jeq MoveTiro_Skip
-		call MoveTiro_Apaga_Dois
-		call MoveTiro_Desenha_Dois		;}
-  MoveTiro_Skip:
+	jeq MoveTiro_Skip_Dois
+	call MoveTiro_Apaga_Dois
+	call MoveTiro_Desenha_Dois		;}
 	
+	load r1, posAlien1
+	cmp r0, r1
+	jeq Tiro2_Alien1
+	
+	load r1, posAlien2
+	cmp r0, r1
+	jeq Tiro2_Alien2
+	
+	load r1, posAlien3
+	cmp r0, r1
+	jeq Tiro2_Alien3
+	
+	load r1, posAlien4
+	cmp r0, r1
+	jeq Tiro2_Alien4
+	
+	jmp MoveTiro_Skip_Dois
+	
+	Tiro2_Alien1:
+		loadn r1, #1
+		store Alien1Dead, r1
+		loadn r0, #0
+		store FlagTiro2, r0
+		store posAlien1, r0
+		
+		load r2, Kills
+		inc r2
+		store Kills, r2
+		
+		load r3, Cont_Deaths
+		inc r3
+		store Cont_Deaths, r3
+		
+		call MoveTiro_Apaga_Dois
+		jmp MoveTiro_Skip_Dois
+	
+	Tiro2_Alien2:
+		loadn r1, #1
+		store Alien2Dead, r1
+		loadn r0, #0
+		store FlagTiro2, r0
+		store posAlien2, r0
+		
+		load r2, Kills
+		inc r2
+		store Kills, r2
+		
+		load r3, Cont_Deaths
+		inc r3
+		store Cont_Deaths, r3
+		
+		call MoveTiro_Apaga_Dois
+		jmp MoveTiro_Skip_Dois
+		
+	Tiro2_Alien3:
+		loadn r1, #1
+		store Alien3Dead, r1
+		loadn r0, #0
+		store FlagTiro2, r0
+		store posAlien3, r0
+		
+		load r2, Kills
+		inc r2
+		store Kills, r2
+		
+		load r3, Cont_Deaths
+		inc r3
+		store Cont_Deaths, r3
+		
+		call MoveTiro_Apaga_Dois
+		jmp MoveTiro_Skip_Dois
+	
+	Tiro2_Alien4:
+		loadn r1, #1
+		store Alien4Dead, r1
+		loadn r0, #0
+		store FlagTiro2, r0
+		store posAlien4, r0
+		
+		load r2, Kills
+		inc r2
+		store Kills, r2
+		
+		load r3, Cont_Deaths
+		inc r3
+		store Cont_Deaths, r3
+		
+		call MoveTiro_Apaga_Dois
+		jmp MoveTiro_Skip_Dois
+		
+		
+  MoveTiro_Skip_Dois:
+	
+	pop r3
+	pop r2
 	pop r1
 	pop r0
 	rts
@@ -1448,6 +2269,8 @@ MoveTiro_Dois:
 MoveTiro_Tres:
 	push r0
 	push r1
+	push r2
+	push r3
 	
 	call MoveTiro_RecalculaPos_Tres
 
@@ -1457,10 +2280,104 @@ MoveTiro_Tres:
 	load r1, posAntTiro3
 	cmp r0, r1
 	jeq MoveTiro_Skip_Tres
+	call MoveTiro_Apaga_Tres
+	call MoveTiro_Desenha_Tres		;}
+	
+	load r1, posAlien1
+	cmp r0, r1
+	jeq Tiro3_Alien1
+	
+	load r1, posAlien2
+	cmp r0, r1
+	jeq Tiro3_Alien2
+	
+	load r1, posAlien3
+	cmp r0, r1
+	jeq Tiro3_Alien3
+	
+	load r1, posAlien4
+	cmp r0, r1
+	jeq Tiro3_Alien4
+	
+	jmp MoveTiro_Skip_Tres
+	
+	Tiro3_Alien1:
+		loadn r1, #1
+		store Alien1Dead, r1
+		loadn r0, #0
+		store FlagTiro3, r0
+		store posAlien1, r0
+		
+		load r2, Kills
+		inc r2
+		store Kills, r2
+		
+		load r3, Cont_Deaths
+		inc r3
+		store Cont_Deaths, r3
+		
 		call MoveTiro_Apaga_Tres
-		call MoveTiro_Desenha_Tres		;}
+		jmp MoveTiro_Skip_Tres
+	
+	Tiro3_Alien2:
+		loadn r1, #1
+		store Alien2Dead, r1
+		loadn r0, #0
+		store FlagTiro3, r0
+		store posAlien2, r0
+		
+		load r2, Kills
+		inc r2
+		store Kills, r2
+		
+		load r3, Cont_Deaths
+		inc r3
+		store Cont_Deaths, r3
+		
+		call MoveTiro_Apaga_Tres
+		jmp MoveTiro_Skip_Tres
+		
+	Tiro3_Alien3:
+		loadn r1, #1
+		store Alien3Dead, r1
+		loadn r0, #0
+		store FlagTiro3, r0
+		store posAlien3, r0
+		
+		load r2, Kills
+		inc r2
+		store Kills, r2
+		
+		load r3, Cont_Deaths
+		inc r3
+		store Cont_Deaths, r3
+		
+		call MoveTiro_Apaga_Tres
+		jmp MoveTiro_Skip_Tres
+	
+	Tiro3_Alien4:
+		loadn r1, #1
+		store Alien4Dead, r1
+		loadn r0, #0
+		store FlagTiro3, r0
+		store posAlien4, r0
+		
+		load r2, Kills
+		inc r2
+		store Kills, r2
+		
+		load r3, Cont_Deaths
+		inc r3
+		store Cont_Deaths, r3
+		
+		call MoveTiro_Apaga_Tres
+		jmp MoveTiro_Skip_Tres
+	
   MoveTiro_Skip_Tres:
 	
+	
+	pop r3
+	pop r2
 	pop r1
 	pop r0
 	rts
@@ -2245,13 +3162,13 @@ MoveTiro_RecalculaPos_Tres:
 		
 	
 	
-  MoveTiro_RecalculaPos_Fim2_Tres:	
-    pop R4
-    pop R3
-	  pop R2
-	  pop R1
-	  pop R0
-	  rts
+  	MoveTiro_RecalculaPos_Fim2_Tres:	
+    	pop R4
+    	pop R3
+	  	pop R2
+	  	pop R1
+	  	pop R0
+	  	rts
 
   MoveTiro_RecalculaPos_Boom_Tres:	
 	; Limpa a Tela !!
