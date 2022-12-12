@@ -69,43 +69,6 @@ FlagTiro2: var #1
 FlagTiro3: var #1
 
 
-
-IncRand: var #1			; Incremento para circular na Tabela de nr. Randomicos
-Rand : var #30			; Tabela de nr. Randomicos entre 0 - 7
-	static Rand + #0, #15
-	static Rand + #1, #3
-	static Rand + #2, #5
-	static Rand + #3, #6
-	static Rand + #4, #6
-	static Rand + #5, #4
-	static Rand + #6, #2
-	static Rand + #7, #0
-	static Rand + #8, #1
-	static Rand + #9, #5
-	static Rand + #10, #2
-	static Rand + #11, #2
-	static Rand + #12, #0
-	static Rand + #13, #3
-	static Rand + #14, #7
-	static Rand + #15, #5
-	static Rand + #16, #0
-	static Rand + #17, #6
-	static Rand + #18, #7
-	static Rand + #19, #2
-	static Rand + #20, #22
-	static Rand + #20, #7
-	static Rand + #21, #1
-	static Rand + #22, #5
-	static Rand + #23, #6
-	static Rand + #24, #1
-	static Rand + #25, #2
-	static Rand + #26, #6
-	static Rand + #27, #4
-	static Rand + #28, #6
-	static Rand + #29, #0
-
-
-
 ;------------------------------
 menu:
 	call ApagaTela
@@ -358,17 +321,20 @@ main2:
 	;store posAntAlien, R0	; Zera Posicao Anterior do Alien
 	
 	loadn R0, #100
+	store posTiro2, R0
+	store posAntTiro2, R0
 	store FlagTiro2, R0
 	store posNave2, R0
 	store posAntNave2, R0
 	
 	Loadn R0, #0			; Contador para os Mods	= 0
 	loadn R2, #0			; Para verificar se (mod(c/10)==0
-  store dirNave, R0
-  store dirTiro1, R0   ;começa na vertical
-  store dirTiro2, R0
-  store dirTiro3, R0
-  store dirTiro_Recalculapos, R0
+	store dirNave, R0
+	store dirTiro1, R0   ;começa na vertical
+	store dirTiro2, R0
+	store dirTiro3, R0
+	store dirTiro_Recalculapos, R0
+	
 	
 	call MoveNave_Desenha
 	call MoveNave2_Desenha
@@ -632,17 +598,16 @@ MoveNave_Multi:
 	load r0, posNave
 	load r1, posAntNave
 	cmp r0, r1
-	jeq MoveNave_Skip
+	jeq MoveNave_Multi_Skip
 		call MoveNave_Apaga
 		call MoveNave_Desenha		;}
 		
-MoveNave_Skip:
+	MoveNave_Multi_Skip:
+			
 		
-	
-	pop r1
-	pop r0
-	rts
-	
+		pop r1
+		pop r0
+		rts
 	
 ;------------------------------
 MoveNave2:
@@ -665,12 +630,12 @@ MoveNave2:
 		call MoveNave2_Apaga
 		call MoveNave2_Desenha		;}
 		
-MoveNave2_Skip:
-	
-	pop r2
-	pop r1
-	pop r0
-	rts
+	MoveNave2_Skip:
+		
+		pop r2
+		pop r1
+		pop r0
+		rts
 
 ;--------------------------------
 	
@@ -2617,14 +2582,15 @@ MoveTiro_Multi:
 	load r0, posTiro
 	load r1, posAntTiro
 	cmp r0, r1
-	jeq MoveTiro_Skip
-		call MoveTiro_Apaga
-		call MoveTiro_Desenha		;}
-  MoveTiro_Skip:
+	jeq MoveTiro_Multi_Skip
 	
-	pop r1
-	pop r0
-	rts
+	call MoveTiro_Apaga
+	call MoveTiro_Desenha	
+		
+	MoveTiro_Multi_Skip:
+		pop r1
+		pop r0
+		rts
 
 ;--------------------------------
 
@@ -3513,7 +3479,7 @@ MoveTiro_RecalculaPos_Multi:
 	cmp r0, r1				; tecla == 'n' ?
 	jeq MoveTiro_RecalculaPos_Boom_FimJogo_Multi	; tecla e' 'n'
 	
-	loadn r0, #'s'
+	loadn r0, #'y'
 	cmp r0, r1				; tecla == 's' ?
 	jne MoveTiro_RecalculaPos_Boom_Loop_Multi	; tecla nao e' 's'
 	
