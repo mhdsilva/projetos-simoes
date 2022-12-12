@@ -2,18 +2,21 @@ jmp menu
 
 
 Msn0: string "V O C E   V E N C E U !!!"
-Msn1: string "Quer jogar novamente? <s/n>"
+Msn1: string "Quer jogar novamente? <y/n>"
 Msn2: string "[ 1 ] Jogar SinglePlayer"
 Msn3: string "[ 2 ] Jogar MultiPlayer Local"
 Msn4: string "[ 0 ] Sair"
 Msn5: string "P L A Y E R  1   V E N C E U !!!"
 Msn6: string "P L A Y E R  2   V E N C E U !!!"
 Msn7: string "G A M E   O V E R"
+Msn8: string "Kills:"
 
 Letra: var #1		; Contem a letra que foi digitada
 
 Kills: var #1
 Cont_Deaths: var #1
+auxKills: var #1
+auxDigito: var #1
 
 
 dirNave: var #1
@@ -1990,6 +1993,15 @@ Game_Over:
 	call ImprimeTela   		;  Rotina de Impresao de Cenario na Tela Inteira
   
 	;imprime Voce perdeu !!!
+	loadn r0, #893
+	loadn r1, #Msn8
+	loadn r2, #2304
+	call ImprimeStr
+	
+	
+	call Print_Kills
+	
+	
 	loadn r0, #530
 	loadn r1, #Msn7
 	loadn r2, #2304
@@ -2008,7 +2020,7 @@ Game_Over:
 		cmp r0, r1				; tecla == 'n' ?
 		jeq Game_Over_FimJogo	; tecla e' 'n'
 		
-		loadn r0, #'s'
+		loadn r0, #'y'
 		cmp r0, r1				; tecla == 's' ?
 		jne Game_Over_Loop	; tecla nao e' 's'
 	
@@ -2026,8 +2038,217 @@ Game_Over:
  	Game_Over_FimJogo:
 		jmp menu
 
+;---------------------------------- IMPRIMIR KILLS ----------------------------------
+Print_Kills:
+	push r0
+	push r1
+	push r2
+	push r3
+	push r4
+	push r5
+	push r6
+	push r7
+	
+	;383 -> para 999
+	;384 -> para 9999
+
+	load r0, Kills
+	loadn r1, #10
+	
+	mod r2, r0, r1
+	store auxKills, r2
+	loadn r3, #903
+	store auxDigito, r3
+	call Print_Kills_Numeros		;printa a casa das unidades
+	
+	loadn r1, #10
+	load r0, Kills
+	div r2, r0, r1
+	mod r2, r2, r1
+	store auxKills, r2
+	loadn r3, #902
+	store auxDigito, r3
+	call Print_Kills_Numeros		;printa a casa das dezenas
+	
+	loadn r1, #100
+	load r0, Kills
+	div r2, r0, r1
+	mod r2, r2, r1
+	store auxKills, r2
+	loadn r3, #901
+	store auxDigito, r3
+	call Print_Kills_Numeros		;printa a casa das centenas
+	
+	loadn r1, #1000
+	load r0, Kills
+	div r2, r0, r1
+	mod r2, r2, r1
+	store auxKills, r2
+	loadn r3, #900
+	store auxDigito, r3
+	call Print_Kills_Numeros		;printa a casa das centenas
 
 
+
+
+
+	pop r7
+	pop r6
+	pop r5
+	pop r4
+	pop r3
+	pop r2
+	pop r1
+	pop r0
+	rts
+
+;----------------------------------
+Print_Kills_Numeros:
+	push r0
+	push r1
+	push r2
+	push r3
+	push r4
+	push r5
+	push r6
+	push r7
+	
+	load r0, auxKills
+	
+	loadn r1, #0
+	cmp r0, r1
+	jeq Numero_Zero
+	
+	loadn r1, #1
+	cmp r0, r1
+	jeq Numero_Um
+	
+	loadn r1, #2
+	cmp r0, r1
+	jeq Numero_Dois
+	
+	loadn r1, #3
+	cmp r0, r1
+	jeq Numero_Tres
+	
+	loadn r1, #4
+	cmp r0, r1
+	jeq Numero_Quatro
+	
+	loadn r1, #5
+	cmp r0, r1
+	jeq Numero_Cinco
+	
+	loadn r1, #6
+	cmp r0, r1
+	jeq Numero_Seis
+	
+	loadn r1, #7
+	cmp r0, r1
+	jeq Numero_Sete
+	
+	loadn r1, #8
+	cmp r0, r1
+	jeq Numero_Oito
+	
+	loadn r1, #9
+	cmp r0, r1
+	jeq Numero_Nove
+	
+	
+	Numero_Zero:
+		load r2, auxDigito
+		loadn r3, #48
+		loadn r4, #2304
+		add r3, r3, r4
+		outchar r3, r2
+		jmp Print_Kills_Numeros_Fim
+	
+	Numero_Um:
+		load r2, auxDigito
+		loadn r3, #49
+		loadn r4, #2304
+		add r3, r3, r4
+		outchar r3, r2
+		jmp Print_Kills_Numeros_Fim
+		
+	Numero_Dois:
+		load r2, auxDigito
+		loadn r3, #50
+		loadn r4, #2304
+		add r3, r3, r4
+		outchar r3, r2
+		jmp Print_Kills_Numeros_Fim
+	
+	Numero_Tres:
+		load r2, auxDigito
+		loadn r3, #51
+		loadn r4, #2304
+		add r3, r3, r4
+		outchar r3, r2
+		jmp Print_Kills_Numeros_Fim
+		
+	Numero_Quatro:
+		load r2, auxDigito
+		loadn r3, #52
+		loadn r4, #2304
+		add r3, r3, r4
+		outchar r3, r2
+		jmp Print_Kills_Numeros_Fim
+	
+	Numero_Cinco:
+		load r2, auxDigito
+		loadn r3, #53
+		loadn r4, #2304
+		add r3, r3, r4
+		outchar r3, r2
+		jmp Print_Kills_Numeros_Fim
+	
+	Numero_Seis:
+		load r2, auxDigito
+		loadn r3, #54
+		loadn r4, #2304
+		add r3, r3, r4
+		outchar r3, r2
+		jmp Print_Kills_Numeros_Fim
+		
+	Numero_Sete:
+		load r2, auxDigito
+		loadn r3, #55
+		loadn r4, #2304
+		add r3, r3, r4
+		outchar r3, r2
+		jmp Print_Kills_Numeros_Fim
+		
+	Numero_Oito:
+		load r2, auxDigito
+		loadn r3, #56
+		loadn r4, #2304
+		add r3, r3, r4
+		outchar r3, r2
+		jmp Print_Kills_Numeros_Fim
+		
+	Numero_Nove:
+		load r2, auxDigito
+		loadn r3, #57
+		loadn r4, #2304
+		add r3, r3, r4
+		outchar r3, r2
+		jmp Print_Kills_Numeros_Fim
+	
+	
+	
+	Print_Kills_Numeros_Fim:
+		pop r7
+		pop r6
+		pop r5
+		pop r4
+		pop r3
+		pop r2
+		pop r1
+		pop r0
+		rts
+	
 ;----------------------------------
 ;----------------------------------
 ;--------------------------
