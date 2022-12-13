@@ -1,15 +1,17 @@
 jmp menu
 
 
-Msn0: string "V O C E   V E N C E U !!!"
-Msn1: string "Quer jogar novamente? <y/n>"
+
+Msn1: string "play again? <y/n>"
 Msn2: string "[ 1 ] Jogar SinglePlayer"
 Msn3: string "[ 2 ] Jogar MultiPlayer Local"
-Msn4: string "[ 0 ] Sair"
-Msn5: string "P L A Y E R  1   V E N C E U !!!"
-Msn6: string "P L A Y E R  2   V E N C E U !!!"
+Msn4: string "[ 0 ] Exit"
+Msn5: string "P L A Y E R  1  W O N !!!"
+Msn6: string "P L A Y E R  2  W O N !!!"
 Msn7: string "G A M E   O V E R"
 Msn8: string "Kills:"
+Msn9: string "Bullets:"
+Msn10: string "Horda:"
 
 Letra: var #1		; Contem a letra que foi digitada
 
@@ -17,6 +19,20 @@ Kills: var #1
 Cont_Deaths: var #1
 auxKills: var #1
 auxDigito: var #1
+
+Bullets: var #1
+addBullets: var #1
+auxBullets: var #1
+auxDigitoBullets: var #1
+
+velAlien1: var #1
+velAlien2: var #1
+velAlien3: var #1
+velAlien4: var #1
+
+Horda: var #1
+auxHorda: var #1
+auxDigitoHorda: var #1
 
 
 dirNave: var #1
@@ -120,25 +136,27 @@ main:
 	loadn R2, #1792  			; cor branca!
 	call ImprimeTela2   		;  Rotina de Impresao de Cenario na Tela Inteira
     
-	loadn R1, #tela3Linha0	; Endereco onde comeca a primeira linha do cenario!!
-	loadn R2, #2816   			; cor branca!
-	call ImprimeTela2   		;  Rotina de Impresao de Cenario na Tela Inteira
-
-	loadn R1, #tela4Linha0	; Endereco onde comeca a primeira linha do cenario!!
-	loadn R2, #256   			; cor branca!
-	call ImprimeTela2   		;  Rotina de Impresao de Cenario na Tela Inteira
+	loadn r0, #1160
+	loadn r1, #Msn9
+	loadn r2, #3072
+	call ImprimeStr
+	
+	loadn r0, #1189
+	loadn r1, #Msn10
+	loadn r2, #2304
+	call ImprimeStr
 
 	Loadn R0, #619			
 	store posNave, R0		; Zera Posicao Atual da Nave
 	store posAntNave, R0	; Zera Posicao Anterior da Nave
 	
-	store FlagTiro, R0		; Zera o Flag para marcar que ainda nao Atirou!
+	;store FlagTiro, R0		; Zera o Flag para marcar que ainda nao Atirou!
 	store posTiro, R0		; Zera Posicao Atual do Tiro
 	store posAntTiro, R0	; Zera Posicao Anterior do Tiro
-	store FlagTiro2, R0		; Zera o Flag para marcar que ainda nao Atirou!
+	;store FlagTiro2, R0		; Zera o Flag para marcar que ainda nao Atirou!
 	store posTiro2, R0		; Zera Posicao Atual do Tiro
 	store posAntTiro2, R0	; Zera Posicao Anterior do Tiro
-	store FlagTiro3, R0		; Zera o Flag para marcar que ainda nao Atirou!
+	;store FlagTiro3, R0		; Zera o Flag para marcar que ainda nao Atirou!
 	store posTiro3, R0		; Zera Posicao Atual do Tiro
 	store posAntTiro3, R0	; Zera Posicao Anterior do Tiro
 	
@@ -159,9 +177,32 @@ main:
 	store posAlien4, r0
 	store posAntAlien4, r0
 	
+	loadn R0, #12			;a nave começa com 12 balas
+	store Bullets, r0
+	
+	loadn r0, #5
+	store velAlien1, r0
+	store velAlien4, r0
+	
+	loadn r0, #4
+	store velAlien2, r0
+	
+	loadn r0, #3
+	store velAlien3, r0
+	
+	loadn r0, #1
+	store Horda, r0
+	
+	loadn r0, #8
+	store addBullets, r0
+	
 	
 	Loadn R0, #0			; Contador para os Mods	= 0
 	loadn R2, #0			; Para verificar se (mod(c/10)==0
+	
+	store FlagTiro, R0		; Zera o Flag para marcar que ainda nao Atirou!
+	store FlagTiro2, R0		; Zera o Flag para marcar que ainda nao Atirou!
+	store FlagTiro3, R0		; Zera o Flag para marcar que ainda nao Atirou!
 	
 	store Kills, r0
 	store Cont_Deaths, r0	
@@ -193,6 +234,10 @@ main:
 	call MoveAlien4_Desenha
 	call MoveNave_Desenha
 	
+	
+	call Print_Hordas
+	call Print_Bullets
+	
 	Loop:
 	
 		loadn R1, #1    ;padrao eh 10
@@ -201,23 +246,26 @@ main:
 		ceq MoveNave	; Chama Rotina de movimentacao da Nave
 	
 		
-		
-		loadn R1, #4   ;padrao eh 30
+		load R1, velAlien1
+		;loadn R1, #5   ;padrao eh 4
 		mod R1, R0, R1
 		cmp R1, R2		; if (mod(c/30)==0
 		ceq MoveAlien1	; Chama Rotina de movimentacao do Alien
 		
-		loadn R1, #3   ;padrao eh 30
+		load R1, velAlien2
+		;loadn R1, #4   ;padrao eh 3
 		mod R1, R0, R1
 		cmp R1, R2		; if (mod(c/30)==0
 		ceq MoveAlien2	; Chama Rotina de movimentacao do Alien
 		
-		loadn R1, #2   ;padrao eh 30
+		load R1, velAlien3
+		;loadn R1, #3   ;padrao eh 2
 		mod R1, R0, R1
 		cmp R1, R2		; if (mod(c/30)==0
 		ceq MoveAlien3	; Chama Rotina de movimentacao do Alien
 		
-		loadn R1, #4   ;padrao eh 30
+		load R1, velAlien4
+		;loadn R1, #5   ;padrao eh 4
 		mod R1, R0, R1
 		cmp R1, R2		; if (mod(c/30)==0
 		ceq MoveAlien4	; Chama Rotina de movimentacao do Alien
@@ -898,6 +946,12 @@ MoveNave_RecalculaPos:		; Recalcula posicao da Nave em funcao das Teclas pressio
 
 	
   MoveNave_RecalculaPos_Tiro:	
+  	
+  	loadn R1, #0
+  	load R2, Bullets
+  	cmp r1, r2
+  	jeq MoveNave_RecalculaPos_Fim
+  	
 	loadn R1, #1			; Se Atirou:
 	load r2, FlagTiro
 	cmp r1, r2
@@ -914,6 +968,13 @@ MoveNave_RecalculaPos:		; Recalcula posicao da Nave em funcao das Teclas pressio
 	jmp MoveNave_RecalculaPos_Fim
 	
 	Tiro_Um:
+		
+		load r3, Bullets
+		sub r3, r3, r1
+		store Bullets, r3
+		
+		call Print_Bullets
+	
 		store FlagTiro, R1		; FlagTiro = 1
 		store posTiro, R0		; posTiro = posNave
 		
@@ -952,6 +1013,13 @@ MoveNave_RecalculaPos:		; Recalcula posicao da Nave em funcao das Teclas pressio
 			
 	
 	Tiro_Dois:
+	
+		load r3, Bullets
+		sub r3, r3, r1
+		store Bullets, r3
+		
+		call Print_Bullets
+	
 		store FlagTiro2, R1		; FlagTiro = 1
 		store posTiro2, R0		; posTiro = posNave
 		
@@ -989,6 +1057,13 @@ MoveNave_RecalculaPos:		; Recalcula posicao da Nave em funcao das Teclas pressio
 			jmp MoveNave_RecalculaPos_Fim	
 	
 	Tiro_Tres:
+		
+		load r3, Bullets
+		sub r3, r3, r1
+		store Bullets, r3
+		
+		call Print_Bullets
+	
 		store FlagTiro3, R1		; FlagTiro = 1
 		store posTiro3, R0		; posTiro = posNave
 		
@@ -1345,7 +1420,12 @@ MoveAlien1_RecalculaPos:
 	jeq MoveAlien1_RecalculaPos_Volta
 	
 	load r2, FlagTiro
-	loadn r3, #1
+	loadn r3, #0
+	cmp r2, r3
+	jeq MoveAlien1_RecalculaPos_Continua
+	
+	load r2, dirTiro1
+	loadn r3, #0
 	cmp r2, r3
 	jeq MoveAlien1_RecalculaPos_Desvia
 	
@@ -1353,7 +1433,7 @@ MoveAlien1_RecalculaPos:
 	
 	MoveAlien1_RecalculaPos_Desvia:
 		load r0, posAlien1
-		loadn r1, #1
+		loadn r1, #41
 		add r0, r0, r1
 		store posAlien1, r0
 		loadn r2, #1
@@ -1362,8 +1442,8 @@ MoveAlien1_RecalculaPos:
 	
 	MoveAlien1_RecalculaPos_Volta:
 		load r0, posAlien1
-		loadn r1, #1
-		sub r0, r0, r1
+		loadn r1, #1		;#1 padrao
+		sub r0, r0, r1      ;sub padrao
 		store posAlien1, r0
 		loadn r2, #0
 		store desAlien1, r2
@@ -1918,7 +1998,18 @@ Reviver_Aliens:
 	call MoveAlien3_Apaga
 	call MoveAlien4_Apaga
 	
+	load r0, Bullets
+	load r1, addBullets
+	add r0, r0, r1
+	store Bullets, r0
+	
+	call Print_Bullets
+	
 	loadn r0, #0
+	store desAlien1, r0
+	store desAlien2, r0
+	store desAlien3, r0
+	store desAlien4, r0
 	store Alien1Dead, r0
 	store Alien2Dead, r0
 	store Alien3Dead, r0
@@ -1940,6 +2031,51 @@ Reviver_Aliens:
 	loadn r0, #1179
 	store posAlien4, r0
 	store posAntAlien4, r0
+	
+	load r0, Horda
+	inc r0
+	store Horda, r0
+	
+	call Print_Hordas
+	
+	loadn r1, #10
+	cmp r0, r1
+	jeq Horda_Dez
+	
+	loadn r1, #20
+	cmp r0, r1
+	jeq Horda_Vinte
+	
+	loadn r1, #30
+	cmp r0, r1
+	jeq Horda_Trinta
+	
+	jmp Reviver_Aliens_Fim
+	
+	Horda_Dez:
+		loadn r0, #4
+		store velAlien1, r0
+		store velAlien4, r0
+		
+		loadn r0, #3
+		store velAlien2, r0
+		
+		loadn r0, #2
+		store velAlien3, r0
+		
+		jmp Reviver_Aliens_Fim
+		
+	Horda_Vinte:
+		loadn r0, #6
+		store addBullets, r0
+		
+		jmp Reviver_Aliens_Fim
+		
+	Horda_Trinta:
+		loadn r0, #5
+		store addBullets, r0
+		
+		jmp Reviver_Aliens_Fim
 	
 	Reviver_Aliens_Fim:
 		pop r1
@@ -1963,6 +2099,11 @@ Game_Over:
 	loadn r2, #2304
 	call ImprimeStr
 	
+	loadn r0, #973
+	loadn r1, #Msn10
+	loadn r2, #2304
+	call ImprimeStr
+	
 	
 	call Print_Kills
 	
@@ -1973,7 +2114,7 @@ Game_Over:
 	call ImprimeStr
 	
 	;imprime quer jogar novamente
-	loadn r0, #605
+	loadn r0, #610
 	loadn r1, #Msn1
 	loadn r2, #2304
 	call ImprimeStr
@@ -2053,8 +2194,42 @@ Print_Kills:
 	store auxDigito, r3
 	call Print_Kills_Numeros		;printa a casa das centenas
 
-
-
+	
+	load r0, Horda
+	loadn r1, #10
+	
+	mod r2, r0, r1
+	store auxHorda, r2
+	loadn r3, #983
+	store auxDigitoHorda, r3
+	call Print_Hordas_Numeros		;printa a casa das unidades
+	
+	loadn r1, #10
+	load r0, Horda
+	div r2, r0, r1
+	mod r2, r2, r1
+	store auxHorda, r2
+	loadn r3, #982
+	store auxDigitoHorda, r3
+	call Print_Hordas_Numeros		;printa a casa das dezenas
+	
+	loadn r1, #100
+	load r0, Horda
+	div r2, r0, r1
+	mod r2, r2, r1
+	store auxHorda, r2
+	loadn r3, #981
+	store auxDigitoHorda, r3
+	call Print_Hordas_Numeros		;printa a casa das centenas
+	
+	loadn r1, #1000
+	load r0, Horda
+	div r2, r0, r1
+	mod r2, r2, r1
+	store auxHorda, r2
+	loadn r3, #980
+	store auxDigitoHorda, r3
+	call Print_Hordas_Numeros		;printa a casa das centenas
 
 
 	pop r7
@@ -2213,6 +2388,416 @@ Print_Kills_Numeros:
 		pop r1
 		pop r0
 		rts
+		
+		
+;---------------------------------- PRINT MUNIÇÕES ----------------------------
+Print_Bullets:
+	push r0
+	push r1
+	push r2
+	push r3
+	push r4
+	push r5
+	push r6
+	push r7
+	
+	;383 -> para 999
+	;384 -> para 9999
+
+	load r0, Bullets
+	loadn r1, #10
+	
+	mod r2, r0, r1
+	store auxBullets, r2
+	loadn r3, #1171
+	store auxDigitoBullets, r3
+	call Print_Bullets_Numeros		;printa a casa das unidades
+	
+	loadn r1, #10
+	load r0, Bullets
+	div r2, r0, r1
+	mod r2, r2, r1
+	store auxBullets, r2
+	loadn r3, #1170
+	store auxDigitoBullets, r3
+	call Print_Bullets_Numeros		;printa a casa das dezenas
+	
+	loadn r1, #100
+	load r0, Bullets
+	div r2, r0, r1
+	mod r2, r2, r1
+	store auxBullets, r2
+	loadn r3, #1169
+	store auxDigitoBullets, r3
+	call Print_Bullets_Numeros		;printa a casa das centenas
+	
+
+	pop r7
+	pop r6
+	pop r5
+	pop r4
+	pop r3
+	pop r2
+	pop r1
+	pop r0
+	rts
+
+;----------------------------------
+Print_Bullets_Numeros:
+	push r0
+	push r1
+	push r2
+	push r3
+	push r4
+	push r5
+	push r6
+	push r7
+	
+	load r0, auxBullets
+	
+	loadn r1, #0
+	cmp r0, r1
+	jeq Numero_Zero2
+	
+	loadn r1, #1
+	cmp r0, r1
+	jeq Numero_Um2
+	
+	loadn r1, #2
+	cmp r0, r1
+	jeq Numero_Dois2
+	
+	loadn r1, #3
+	cmp r0, r1
+	jeq Numero_Tres2
+	
+	loadn r1, #4
+	cmp r0, r1
+	jeq Numero_Quatro2
+	
+	loadn r1, #5
+	cmp r0, r1
+	jeq Numero_Cinco2
+	
+	loadn r1, #6
+	cmp r0, r1
+	jeq Numero_Seis2
+	
+	loadn r1, #7
+	cmp r0, r1
+	jeq Numero_Sete2
+	
+	loadn r1, #8
+	cmp r0, r1
+	jeq Numero_Oito2
+	
+	loadn r1, #9
+	cmp r0, r1
+	jeq Numero_Nove2
+	
+	
+	Numero_Zero2:
+		load r2, auxDigitoBullets
+		loadn r3, #48
+		loadn r4, #3072
+		add r3, r3, r4
+		outchar r3, r2
+		jmp Print_Bullets_Numeros_Fim
+	
+	Numero_Um2:
+		load r2, auxDigitoBullets
+		loadn r3, #49
+		loadn r4, #3072
+		add r3, r3, r4
+		outchar r3, r2
+		jmp Print_Bullets_Numeros_Fim
+		
+	Numero_Dois2:
+		load r2, auxDigitoBullets
+		loadn r3, #50
+		loadn r4, #3072
+		add r3, r3, r4
+		outchar r3, r2
+		jmp Print_Bullets_Numeros_Fim
+	
+	Numero_Tres2:
+		load r2, auxDigitoBullets
+		loadn r3, #51
+		loadn r4, #3072
+		add r3, r3, r4
+		outchar r3, r2
+		jmp Print_Bullets_Numeros_Fim
+		
+	Numero_Quatro2:
+		load r2, auxDigitoBullets
+		loadn r3, #52
+		loadn r4, #3072
+		add r3, r3, r4
+		outchar r3, r2
+		jmp Print_Bullets_Numeros_Fim
+	
+	Numero_Cinco2:
+		load r2, auxDigitoBullets
+		loadn r3, #53
+		loadn r4, #3072
+		add r3, r3, r4
+		outchar r3, r2
+		jmp Print_Bullets_Numeros_Fim
+	
+	Numero_Seis2:
+		load r2, auxDigitoBullets
+		loadn r3, #54
+		loadn r4, #3072
+		add r3, r3, r4
+		outchar r3, r2
+		jmp Print_Bullets_Numeros_Fim
+		
+	Numero_Sete2:
+		load r2, auxDigitoBullets
+		loadn r3, #55
+		loadn r4, #3072
+		add r3, r3, r4
+		outchar r3, r2
+		jmp Print_Bullets_Numeros_Fim
+		
+	Numero_Oito2:
+		load r2, auxDigitoBullets
+		loadn r3, #56
+		loadn r4, #3072
+		add r3, r3, r4
+		outchar r3, r2
+		jmp Print_Bullets_Numeros_Fim
+		
+	Numero_Nove2:
+		load r2, auxDigitoBullets
+		loadn r3, #57
+		loadn r4, #3072
+		add r3, r3, r4
+		outchar r3, r2
+		jmp Print_Bullets_Numeros_Fim
+	
+	
+	
+	Print_Bullets_Numeros_Fim:
+		pop r7
+		pop r6
+		pop r5
+		pop r4
+		pop r3
+		pop r2
+		pop r1
+		pop r0
+		rts
+
+
+;---------------------------------- PRINT HORDAS ----------------------------
+Print_Hordas:
+	push r0
+	push r1
+	push r2
+	push r3
+	push r4
+	push r5
+	push r6
+	push r7
+	
+	;383 -> para 999
+	;384 -> para 9999
+
+	load r0, Horda
+	loadn r1, #10
+	
+	mod r2, r0, r1
+	store auxHorda, r2
+	loadn r3, #1199
+	store auxDigitoHorda, r3
+	call Print_Hordas_Numeros		;printa a casa das unidades
+	
+	loadn r1, #10
+	load r0, Horda
+	div r2, r0, r1
+	mod r2, r2, r1
+	store auxHorda, r2
+	loadn r3, #1198
+	store auxDigitoHorda, r3
+	call Print_Hordas_Numeros		;printa a casa das dezenas
+	
+	loadn r1, #100
+	load r0, Horda
+	div r2, r0, r1
+	mod r2, r2, r1
+	store auxHorda, r2
+	loadn r3, #1197
+	store auxDigitoHorda, r3
+	call Print_Hordas_Numeros		;printa a casa das centenas
+	
+	loadn r1, #1000
+	load r0, Horda
+	div r2, r0, r1
+	mod r2, r2, r1
+	store auxHorda, r2
+	loadn r3, #1196
+	store auxDigitoHorda, r3
+	call Print_Hordas_Numeros		;printa a casa das centenas
+	
+
+	pop r7
+	pop r6
+	pop r5
+	pop r4
+	pop r3
+	pop r2
+	pop r1
+	pop r0
+	rts
+
+;----------------------------------
+Print_Hordas_Numeros:
+	push r0
+	push r1
+	push r2
+	push r3
+	push r4
+	push r5
+	push r6
+	push r7
+	
+	load r0, auxHorda
+	
+	loadn r1, #0
+	cmp r0, r1
+	jeq Numero_Zero3
+	
+	loadn r1, #1
+	cmp r0, r1
+	jeq Numero_Um3
+	
+	loadn r1, #2
+	cmp r0, r1
+	jeq Numero_Dois3
+	
+	loadn r1, #3
+	cmp r0, r1
+	jeq Numero_Tres3
+	
+	loadn r1, #4
+	cmp r0, r1
+	jeq Numero_Quatro3
+	
+	loadn r1, #5
+	cmp r0, r1
+	jeq Numero_Cinco3
+	
+	loadn r1, #6
+	cmp r0, r1
+	jeq Numero_Seis3
+	
+	loadn r1, #7
+	cmp r0, r1
+	jeq Numero_Sete3
+	
+	loadn r1, #8
+	cmp r0, r1
+	jeq Numero_Oito3
+	
+	loadn r1, #9
+	cmp r0, r1
+	jeq Numero_Nove3
+	
+	
+	Numero_Zero3:
+		load r2, auxDigitoHorda
+		loadn r3, #48
+		loadn r4, #2304
+		add r3, r3, r4
+		outchar r3, r2
+		jmp Print_Hordas_Numeros_Fim
+	
+	Numero_Um3:
+		load r2, auxDigitoHorda
+		loadn r3, #49
+		loadn r4, #2304
+		add r3, r3, r4
+		outchar r3, r2
+		jmp Print_Hordas_Numeros_Fim
+		
+	Numero_Dois3:
+		load r2, auxDigitoHorda
+		loadn r3, #50
+		loadn r4, #2304
+		add r3, r3, r4
+		outchar r3, r2
+		jmp Print_Hordas_Numeros_Fim
+	
+	Numero_Tres3:
+		load r2, auxDigitoHorda
+		loadn r3, #51
+		loadn r4, #2304
+		add r3, r3, r4
+		outchar r3, r2
+		jmp Print_Hordas_Numeros_Fim
+		
+	Numero_Quatro3:
+		load r2, auxDigitoHorda
+		loadn r3, #52
+		loadn r4, #2304
+		add r3, r3, r4
+		outchar r3, r2
+		jmp Print_Hordas_Numeros_Fim
+	
+	Numero_Cinco3:
+		load r2, auxDigitoHorda
+		loadn r3, #53
+		loadn r4, #2304
+		add r3, r3, r4
+		outchar r3, r2
+		jmp Print_Hordas_Numeros_Fim
+	
+	Numero_Seis3:
+		load r2, auxDigitoHorda
+		loadn r3, #54
+		loadn r4, #2304
+		add r3, r3, r4
+		outchar r3, r2
+		jmp Print_Hordas_Numeros_Fim
+		
+	Numero_Sete3:
+		load r2, auxDigitoHorda
+		loadn r3, #55
+		loadn r4, #2304
+		add r3, r3, r4
+		outchar r3, r2
+		jmp Print_Hordas_Numeros_Fim
+		
+	Numero_Oito3:
+		load r2, auxDigitoHorda
+		loadn r3, #56
+		loadn r4, #2304
+		add r3, r3, r4
+		outchar r3, r2
+		jmp Print_Hordas_Numeros_Fim
+		
+	Numero_Nove3:
+		load r2, auxDigitoHorda
+		loadn r3, #57
+		loadn r4, #2304
+		add r3, r3, r4
+		outchar r3, r2
+		jmp Print_Hordas_Numeros_Fim
+	
+	
+	
+	Print_Hordas_Numeros_Fim:
+		pop r7
+		pop r6
+		pop r5
+		pop r4
+		pop r3
+		pop r2
+		pop r1
+		pop r0
+		rts
+	
 	
 ;----------------------------------
 ;----------------------------------
@@ -3021,13 +3606,10 @@ MoveTiro_RecalculaPos:
 	call ImprimeTela   		;  Rotina de Impresao de Cenario na Tela Inteira
   
 	;imprime Voce Venceu !!!
-	loadn r0, #526
-	loadn r1, #Msn0
-	loadn r2, #2048
-	call ImprimeStr
+	
 	
 	;imprime quer jogar novamente
-	loadn r0, #605
+	loadn r0, #610
 	loadn r1, #Msn1
 	loadn r2, #2048
 	call ImprimeStr
@@ -3191,14 +3773,10 @@ MoveTiro_RecalculaPos_Dois:
 	loadn R2, #0  			; cor branca!
 	call ImprimeTela   		;  Rotina de Impresao de Cenario na Tela Inteira
   
-	;imprime Voce Venceu !!!
-	loadn r0, #526
-	loadn r1, #Msn0
-	loadn r2, #2048
-	call ImprimeStr
+	
 	
 	;imprime quer jogar novamente
-	loadn r0, #605
+	loadn r0, #610
 	loadn r1, #Msn1
 	loadn r2, #2048
 	call ImprimeStr
@@ -3364,13 +3942,10 @@ MoveTiro_RecalculaPos_Tres:
 	call ImprimeTela   		;  Rotina de Impresao de Cenario na Tela Inteira
   
 	;imprime Voce Venceu !!!
-	loadn r0, #526
-	loadn r1, #Msn0
-	loadn r2, #2048
-	call ImprimeStr
+	
 	
 	;imprime quer jogar novamente
-	loadn r0, #605
+	loadn r0, #610
 	loadn r1, #Msn1
 	loadn r2, #2048
 	call ImprimeStr
@@ -3461,13 +4036,13 @@ MoveTiro_RecalculaPos_Multi:
   
 	;imprime Voce Venceu !!!
 
-	loadn r0, #523
+	loadn r0, #526
 	loadn r1, #Msn5
 	loadn r2, #0
 	call ImprimeStr
 	
 	;imprime quer jogar novamente
-	loadn r0, #605
+	loadn r0, #610
 	loadn r1, #Msn1
 	loadn r2, #0
 	call ImprimeStr
@@ -3558,13 +4133,13 @@ MoveTiro2_RecalculaPos:
 	call ImprimeTela   		;  Rotina de Impresao de Cenario na Tela Inteira
   
 	;imprime Voce Venceu !!!
-	loadn r0, #523
+	loadn r0, #526
 	loadn r1, #Msn6
 	loadn r2, #512
 	call ImprimeStr
 	
 	;imprime quer jogar novamente
-	loadn r0, #605
+	loadn r0, #610
 	loadn r1, #Msn1
 	loadn r2, #512
 	call ImprimeStr
@@ -3576,7 +4151,7 @@ MoveTiro2_RecalculaPos:
 	cmp r0, r1				; tecla == 'n' ?
 	jeq MoveTiro2_RecalculaPos_Boom_FimJogo	; tecla e' 'n'
 	
-	loadn r0, #'s'
+	loadn r0, #'y'
 	cmp r0, r1				; tecla == 's' ?
 	jne MoveTiro2_RecalculaPos_Boom_Loop	; tecla nao e' 's'
 	
