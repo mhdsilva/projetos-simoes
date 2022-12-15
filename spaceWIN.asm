@@ -2838,6 +2838,9 @@ MoveTiro:
 	jmp MoveTiro_Skip
 	
 	Tiro1_Alien1:
+		
+		call Dead_Alien1
+		
 		loadn r1, #1
 		store Alien1Dead, r1
 		loadn r0, #0
@@ -2856,6 +2859,9 @@ MoveTiro:
 		jmp MoveTiro_Skip
 	
 	Tiro1_Alien2:
+	
+		call Dead_Alien2
+		
 		loadn r1, #1
 		store Alien2Dead, r1
 		loadn r0, #0
@@ -2874,6 +2880,9 @@ MoveTiro:
 		jmp MoveTiro_Skip
 		
 	Tiro1_Alien3:
+	
+		call Dead_Alien3
+		
 		loadn r1, #1
 		store Alien3Dead, r1
 		loadn r0, #0
@@ -2893,6 +2902,9 @@ MoveTiro:
 		jmp MoveTiro_Skip
 	
 	Tiro1_Alien4:
+		
+		call Dead_Alien4
+		
 		loadn r1, #1
 		store Alien4Dead, r1
 		loadn r0, #0
@@ -2955,6 +2967,7 @@ MoveTiro_Dois:
 	jmp MoveTiro_Skip_Dois
 	
 	Tiro2_Alien1:
+		call Dead_Alien1
 		loadn r1, #1
 		store Alien1Dead, r1
 		loadn r0, #0
@@ -2973,6 +2986,7 @@ MoveTiro_Dois:
 		jmp MoveTiro_Skip_Dois
 	
 	Tiro2_Alien2:
+		call Dead_Alien2
 		loadn r1, #1
 		store Alien2Dead, r1
 		loadn r0, #0
@@ -2991,6 +3005,7 @@ MoveTiro_Dois:
 		jmp MoveTiro_Skip_Dois
 		
 	Tiro2_Alien3:
+		call Dead_Alien3
 		loadn r1, #1
 		store Alien3Dead, r1
 		loadn r0, #0
@@ -3009,6 +3024,7 @@ MoveTiro_Dois:
 		jmp MoveTiro_Skip_Dois
 	
 	Tiro2_Alien4:
+		call Dead_Alien4
 		loadn r1, #1
 		store Alien4Dead, r1
 		loadn r0, #0
@@ -3072,6 +3088,7 @@ MoveTiro_Tres:
 	jmp MoveTiro_Skip_Tres
 	
 	Tiro3_Alien1:
+		call Dead_Alien1
 		loadn r1, #1
 		store Alien1Dead, r1
 		loadn r0, #0
@@ -3090,6 +3107,7 @@ MoveTiro_Tres:
 		jmp MoveTiro_Skip_Tres
 	
 	Tiro3_Alien2:
+		call Dead_Alien2
 		loadn r1, #1
 		store Alien2Dead, r1
 		loadn r0, #0
@@ -3108,6 +3126,7 @@ MoveTiro_Tres:
 		jmp MoveTiro_Skip_Tres
 		
 	Tiro3_Alien3:
+		call Dead_Alien3
 		loadn r1, #1
 		store Alien3Dead, r1
 		loadn r0, #0
@@ -3126,6 +3145,7 @@ MoveTiro_Tres:
 		jmp MoveTiro_Skip_Tres
 	
 	Tiro3_Alien4:
+		call Dead_Alien4
 		loadn r1, #1
 		store Alien4Dead, r1
 		loadn r0, #0
@@ -3152,6 +3172,115 @@ MoveTiro_Tres:
 	pop r0
 	rts
 
+;------------------------------ DEADE ALIENS -------------------------------
+Dead_Alien1:
+	push r0
+	push r1
+	push r2
+	
+	load r0, posAlien1
+	loadn r1, #19
+	cmp r0, r1
+	jeq Dead_Alien1_Fim
+	
+	loadn r1, #40
+	sub r0, r0, r1
+	store posAlien1, r0
+		
+	Dead_Alien1_Fim:
+		Loadn R1, #9	; Alien
+		loadn R2, #2304
+		add R1, R1, R2
+		outchar R1, R0
+		store posAntAlien1, r0
+		
+		pop r2
+		pop r1
+		pop r0
+		rts
+
+
+
+Dead_Alien2:
+	push r0
+	push r1
+	push r2
+	
+	load r0, posAlien2
+	loadn r1, #600
+	cmp r0, r1
+	jeq Dead_Alien2_Fim
+	
+	loadn r1, #1
+	sub r0, r0, r1
+	store posAlien2, r0
+		
+	Dead_Alien2_Fim:
+		Loadn R1, #9	; Alien
+		loadn R2, #2304
+		add R1, R1, R2
+		outchar R1, R0
+		store posAntAlien2, r0
+		
+		pop r2
+		pop r1
+		pop r0
+		rts	
+
+
+
+Dead_Alien3:
+	push r0
+	push r1
+	push r2
+	
+	load r0, posAlien3
+	loadn r1, #639
+	cmp r0, r1
+	jeq Dead_Alien3_Fim
+	
+	loadn r1, #1
+	add r0, r0, r1
+	store posAlien3, r0
+		
+	Dead_Alien3_Fim:
+		Loadn R1, #9	; Alien
+		loadn R2, #2304
+		add R1, R1, R2
+		outchar R1, R0
+		store posAntAlien3, r0
+		
+		pop r2
+		pop r1
+		pop r0
+		rts	
+
+
+Dead_Alien4:
+	push r0
+	push r1
+	push r2
+	
+	load r0, posAlien4
+	loadn r1, #1179
+	cmp r0, r1
+	jeq Dead_Alien4_Fim
+	
+	loadn r1, #40
+	add r0, r0, r1
+	store posAlien4, r0
+		
+	Dead_Alien4_Fim:
+		Loadn R1, #9	; Alien
+		loadn R2, #2304
+		add R1, R1, R2
+		outchar R1, R0
+		store posAntAlien4, r0
+		
+		pop r2
+		pop r1
+		pop r0
+		rts	
 
 
 ;---------------------
