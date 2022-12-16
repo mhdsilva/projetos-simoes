@@ -14,4 +14,11 @@
 <BR>
 
 ## Getting Started
-  
+O jogo possui dois modos de jogo: um modo singleplayer e outro multiplayer local (ainda em desenvolvimento)
+<BR>
+<BR>
+</BR>
+### Singleplayer
+- Neste modo o jogador precisa sobreviver a várias hordas de aliens
+- Sua nave começa com 12 munições, podendo disparar até três tiros por vez
+-
