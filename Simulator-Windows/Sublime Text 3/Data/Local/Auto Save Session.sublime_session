@@ -1,0 +1,1146 @@
+{
+	"folder_history":
+	[
+	],
+	"last_version": 3065,
+	"last_window_id": 2,
+	"log_indexing": false,
+	"settings":
+	{
+		"new_window_height": 480.0,
+		"new_window_settings":
+		{
+			"auto_complete":
+			{
+				"selected_items":
+				[
+					[
+						"MoveNave",
+						"MoveNave_RecalculaPos_Tiro	abc"
+					],
+					[
+						"MoveNa",
+						"MoveNave_RecalculaPos_S	abc"
+					],
+					[
+						"MoveNav",
+						"MoveNave_RecalculaPos_W	abc"
+					],
+					[
+						"MoveNave_",
+						"MoveNave_RecalculaPos_D	abc"
+					],
+					[
+						"posN",
+						"posNave2	abc"
+					],
+					[
+						"posAn",
+						"posAntNave2	abc"
+					],
+					[
+						"posAnt",
+						"posAntNave	abc"
+					],
+					[
+						"digL",
+						"digLetra_Loop"
+					],
+					[
+						"inc",
+						"incloop"
+					]
+				]
+			},
+			"build_system": "Packages/Assembly ICMC/Assembly ICMC.sublime-build",
+			"command_palette":
+			{
+				"height": 81.0,
+				"selected_items":
+				[
+					[
+						"insta",
+						"Package Control: Install Package"
+					]
+				],
+				"width": 400.0
+			},
+			"console":
+			{
+				"height": 126.0,
+				"history":
+				[
+					"import urllib.request,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+				]
+			},
+			"distraction_free":
+			{
+				"menu_visible": true,
+				"show_minimap": false,
+				"show_open_files": false,
+				"show_tabs": false,
+				"side_bar_visible": false,
+				"status_bar_visible": false
+			},
+			"file_history":
+			[
+				"/C/Users/berse/Desktop/Faculdade/2º semestre/Organização e Arquitetura de Computadores/Simulador/pacman.asm",
+				"/C/Users/berse/Desktop/Faculdade/2º semestre/Organização e Arquitetura de Computadores/Simulador/Versao_05_2013/Exemplos/pacman.asm",
+				"/D/Simulador/Hello4.asm",
+				"/D/Teste Ambiente/Hello4.asm",
+				"/D/Teste Ambiente/leString.asm",
+				"/D/Teste Ambiente/forca.asm",
+				"/D/Teste Ambiente - Copia/Hello4.asm",
+				"/D/Teste Ambiente/Sublime Text 3/Data/Packages/User/Preferences.sublime-settings",
+				"/D/Teste Ambiente/printForca.asm",
+				"/D/Teste Ambiente/Sublime Text 3/Data/Packages/User/untitled.sublime-build",
+				"/C/Users/CARLOS~1/AppData/Local/Temp/Rar$DRa0.561/Assembly ICMC.sublime-build",
+				"/D/Documentos/USP/Prat_OrgC/Versao_05_2013/32_bits/Forca01.asm",
+				"/C/Users/CARLOS~1/AppData/Local/Temp/Rar$DRa0.040/Completion Rules.tmPreferences",
+				"/C/Users/CARLOS~1/AppData/Local/Temp/Rar$DRa0.959/C++.tmLanguage",
+				"/C/Users/CARLOS~1/AppData/Local/Temp/Rar$DRa0.091/C++.sublime-settings",
+				"/C/Users/CARLOS~1/AppData/Local/Temp/Rar$DRa0.196/C++.sublime-build",
+				"/C/Users/CARLOS~1/AppData/Local/Temp/Rar$DRa0.532/C.tmLanguage",
+				"/C/Users/CARLOS~1/AppData/Local/Temp/Rar$DRa0.207/Batch File.tmLanguage",
+				"/D/Teste Ambiente/Sublime Text 3/Data/Cache/Assembly ICMC/Assembly_ICMC_Syntax.tmLanguage",
+				"/D/Teste Ambiente/Sublime Text 3/Data/Packages/User/Assembly ICMC.sublime-build",
+				"/D/Documentos/USP/Prat_OrgC/Aula_2015-03-04/Hello4.asm",
+				"/D/Teste Ambiente/Hello4.mif",
+				"/D/Teste Ambiente/Versao_05_2013/Exemplos/Hello4.asm"
+			],
+			"find":
+			{
+				"height": 26.0
+			},
+			"find_in_files":
+			{
+				"height": 0.0,
+				"where_history":
+				[
+				]
+			},
+			"find_state":
+			{
+				"case_sensitive": false,
+				"find_history":
+				[
+					"FlagTiro",
+					"0",
+					"r*",
+					"r3",
+					"r2",
+					"r3"
+				],
+				"highlight": true,
+				"in_selection": false,
+				"preserve_case": false,
+				"regex": false,
+				"replace_history":
+				[
+				],
+				"reverse": false,
+				"show_context": true,
+				"use_buffer2": true,
+				"whole_word": false,
+				"wrap": true
+			},
+			"incremental_find":
+			{
+				"height": 26.0
+			},
+			"input":
+			{
+				"height": 0.0
+			},
+			"menu_visible": true,
+			"output.exec":
+			{
+				"height": 141.0
+			},
+			"output.find_results":
+			{
+				"height": 0.0
+			},
+			"replace":
+			{
+				"height": 48.0
+			},
+			"save_all_on_build": true,
+			"select_file":
+			{
+				"height": 0.0,
+				"selected_items":
+				[
+				],
+				"width": 0.0
+			},
+			"select_project":
+			{
+				"height": 0.0,
+				"selected_items":
+				[
+				],
+				"width": 0.0
+			},
+			"select_symbol":
+			{
+				"height": 0.0,
+				"selected_items":
+				[
+				],
+				"width": 0.0
+			},
+			"show_minimap": true,
+			"show_open_files": false,
+			"show_tabs": true,
+			"side_bar_visible": true,
+			"side_bar_width": 150.0,
+			"status_bar_visible": true,
+			"template_settings":
+			{
+			}
+		},
+		"new_window_width": 640.0
+	},
+	"windows":
+	[
+		{
+			"auto_complete":
+			{
+				"selected_items":
+				[
+					[
+						"Dea",
+						"Dead_Alien1_Fim	abc"
+					],
+					[
+						"posAn",
+						"posAntAlien1	abc"
+					],
+					[
+						"moveA",
+						"MoveAlien1_Apaga"
+					],
+					[
+						"MoveAlien1_",
+						"MoveAlien1_Desenha	abc"
+					],
+					[
+						"mo",
+						"MoveAlien1"
+					],
+					[
+						"pos",
+						"posAlien1	abc"
+					],
+					[
+						"Desenh",
+						"DesenhaEstrelas	abc"
+					],
+					[
+						"Apaga",
+						"ApagaEstrelas	abc"
+					],
+					[
+						"Dese",
+						"DesenhaEstrelas	abc"
+					],
+					[
+						"aux",
+						"auxApagaEstrelas	abc"
+					],
+					[
+						"Apga",
+						"ApagaEstrelas	abc"
+					],
+					[
+						"Ho",
+						"Horda	abc"
+					],
+					[
+						"Print_",
+						"Print_Hordas	abc"
+					],
+					[
+						"Prin",
+						"Print_Hordas_Numeros_Fim	abc"
+					],
+					[
+						"Hor",
+						"Horda	abc"
+					],
+					[
+						"H",
+						"Horda	abc"
+					],
+					[
+						"add",
+						"addBullets	abc"
+					],
+					[
+						"vel",
+						"velAlien3	abc"
+					],
+					[
+						"Horda",
+						"Horda_Dez	abc"
+					],
+					[
+						"Re",
+						"Reviver_Aliens_Fim	abc"
+					],
+					[
+						"hor",
+						"horda	abc"
+					],
+					[
+						"Print",
+						"Print_Bullets_Numeros_Fim	abc"
+					],
+					[
+						"auxD",
+						"auxDigitoBullets	abc"
+					],
+					[
+						"bu",
+						"Bullets"
+					],
+					[
+						"des",
+						"desAlien4	abc"
+					],
+					[
+						"MoveAlien1_RecalculaPos_",
+						"MoveAlien1_RecalculaPos_Desvia	abc"
+					],
+					[
+						"MoveTiro_Apaga_Fim_",
+						"MoveTiro_Apaga_Fim_Multi	abc"
+					],
+					[
+						"MoveTiro_Apaga_Skip1_",
+						"MoveTiro_Apaga_Skip1_Multi	abc"
+					],
+					[
+						"posAntT",
+						"posAntTiro2	abc"
+					],
+					[
+						"Numero_Se",
+						"Numero_Sete	abc"
+					],
+					[
+						"Numero_S",
+						"Numero_Seis	abc"
+					],
+					[
+						"MoveAlien2",
+						"MoveAlien2_Apaga	abc"
+					],
+					[
+						"MoveAlien1",
+						"MoveAlien1_Apaga	abc"
+					],
+					[
+						"Alie",
+						"Alien2Dead	abc"
+					],
+					[
+						"Cont",
+						"Cont_Deaths	abc"
+					],
+					[
+						"desa",
+						"desAlien2"
+					],
+					[
+						"Movi",
+						"Movimentação_A"
+					],
+					[
+						"MoveTiro_Apaga_",
+						"MoveTiro_Apaga_Dois	abc"
+					],
+					[
+						"MoveTiro_Skip_",
+						"MoveTiro_Skip_Dois	abc"
+					],
+					[
+						"MoveTiro2",
+						"MoveTiro2_Apaga	abc"
+					],
+					[
+						"Move",
+						"MoveTiro_Desenha	abc"
+					],
+					[
+						"Tir",
+						"Tiro1_Alien1	abc"
+					],
+					[
+						"Fla",
+						"FlagTiro	abc"
+					],
+					[
+						"move",
+						"MoveTiro"
+					],
+					[
+						"Mov",
+						"MoveTiro2_Apaga	abc"
+					],
+					[
+						"fi",
+						"Fim2"
+					],
+					[
+						"MoveAlien1_Desenha_",
+						"MoveAlien1_Desenha_Fim	abc"
+					],
+					[
+						"alie",
+						"Alien1Dead"
+					],
+					[
+						"Ali",
+						"Alien1Dead	abc"
+					],
+					[
+						"Flag",
+						"FlagTiro	abc"
+					],
+					[
+						"MoveAlie",
+						"MoveAlien1_Desenha	abc"
+					],
+					[
+						"posAli",
+						"posAlien2	abc"
+					],
+					[
+						"MoveAli",
+						"MoveAlien1_RecalculaPos	abc"
+					],
+					[
+						"MoveAlien",
+						"MoveAlien1	abc"
+					],
+					[
+						"posAnt",
+						"posAntAlien1	abc"
+					],
+					[
+						"Apa",
+						"ApagaNave_3	abc"
+					],
+					[
+						"Tiro",
+						"Tiro_Um	abc"
+					],
+					[
+						"MoverTiro_Tres_",
+						"MoverTiro_Tres_3	abc"
+					],
+					[
+						"MoverTiro_Dois_",
+						"MoverTiro_Dois_3	abc"
+					],
+					[
+						"MoverTiro_Um_",
+						"MoverTiro_Um_3	abc"
+					],
+					[
+						"PararTiro_Fim_",
+						"PararTiro_Fim_3	abc"
+					],
+					[
+						"MoveTiro_Desenha_",
+						"MoveTiro_Desenha_Dois	abc"
+					],
+					[
+						"MoveTiro_RecalculaPos_Boom_",
+						"MoveTiro_RecalculaPos_Boom_Dois	abc"
+					],
+					[
+						"MoveTiro_RecalculaPos_Fim2_",
+						"MoveTiro_RecalculaPos_Fim2_Dois	abc"
+					],
+					[
+						"MoveTiro_RecalculaPos_Fim_",
+						"MoveTiro_RecalculaPos_Fim_Dois	abc"
+					],
+					[
+						"MoveTiro_RecalculaPos_",
+						"MoveTiro_RecalculaPos_Dois	abc"
+					],
+					[
+						"MoveNave_R",
+						"MoveNave_RecalculaPos_Fim	abc"
+					],
+					[
+						"Imp",
+						"ImprimeStr	abc"
+					],
+					[
+						"Pala",
+						"PalavraDigitada	abc"
+					],
+					[
+						"E",
+						"Erro	abc"
+					],
+					[
+						"conta",
+						"contadorVerdes	abc"
+					],
+					[
+						"testa",
+						"TestaFim"
+					],
+					[
+						"Testa",
+						"TestaFim_FimJogo	abc"
+					],
+					[
+						"Dgi",
+						"DigLetra	abc"
+					],
+					[
+						"dirT",
+						"dirTiro_Recalculapos	abc"
+					],
+					[
+						"Dir",
+						"Dir_Tiro_Horizontal	abc"
+					],
+					[
+						"sote",
+						"store	abc"
+					],
+					[
+						"dir",
+						"dirTiro_Recalculapos	abc"
+					],
+					[
+						"MoveTiro",
+						"MoveTiro_Desenha_Fim"
+					],
+					[
+						"MoveT",
+						"MoveTiro_Desenha_Horizontal"
+					],
+					[
+						"Par",
+						"PararTiro_Fim	abc"
+					],
+					[
+						"Para",
+						"PararTiro_Zero	abc"
+					],
+					[
+						"MoveTiro_R",
+						"MoveTiro_RecalculaPos_Fim2	abc"
+					],
+					[
+						"Mover_",
+						"Mover_Esq_Um	abc"
+					],
+					[
+						"Mover",
+						"Mover_Sul_Zero	abc"
+					],
+					[
+						"MoveNave_DesenhaD",
+						"MoveNave_DesenhaDIR_A_Fim	abc"
+					],
+					[
+						"movenave",
+						"MoveNave_Desenha"
+					],
+					[
+						"MoveNave_de",
+						"MoveNave_DesenhaDIR_A	abc"
+					],
+					[
+						"MoveNave_De",
+						"MoveNave_DesenhaDIR_A_Fim	abc"
+					],
+					[
+						"MoveNave_D",
+						"MoveNave_DesenhaDIR_A_Tres	abc"
+					],
+					[
+						"MoveNave_Dese",
+						"MoveNave_DesenhaDIR_A	abc"
+					],
+					[
+						"MoveNave",
+						"MoveNave_RecalculaPos_Fim	abc"
+					],
+					[
+						"che",
+						"checkpoint	abc"
+					],
+					[
+						"prin",
+						"printcarreg5Screen	abc"
+					],
+					[
+						"apa",
+						"ApagaTela"
+					],
+					[
+						"pri",
+						"printcarreg1Screen	abc"
+					],
+					[
+						"loop",
+						"loop_load	abc"
+					],
+					[
+						"menu",
+						"menu_loop	abc"
+					],
+					[
+						"dese",
+						"DesenhaNave"
+					],
+					[
+						"bre",
+						"Break"
+					],
+					[
+						"fun",
+						"funcao_loop	abc"
+					],
+					[
+						"Loop",
+						"LoopTiros	abc"
+					],
+					[
+						"fla",
+						"FlagTiros"
+					],
+					[
+						"loo",
+						"LoopTiros"
+					],
+					[
+						"MoveTiro_",
+						"MoveTiro_Vet	abc"
+					],
+					[
+						"MoveNave2_",
+						"MoveNave2_Desenha	abc"
+					],
+					[
+						"vet",
+						"vetTiro	abc"
+					],
+					[
+						"Fl",
+						"FlagTiro2	abc"
+					],
+					[
+						"posNa",
+						"posNave2	abc"
+					],
+					[
+						"posAntA",
+						"posAntAst	abc"
+					],
+					[
+						"posTir",
+						"posTiro2	abc"
+					],
+					[
+						"po",
+						"posTiro	abc"
+					],
+					[
+						"linha",
+						"tela0Linha0"
+					],
+					[
+						"MoveNa",
+						"MoveNave_RecalculaPos_S	abc"
+					],
+					[
+						"MoveNav",
+						"MoveNave_RecalculaPos_W	abc"
+					],
+					[
+						"MoveNave_",
+						"MoveNave_RecalculaPos_D	abc"
+					],
+					[
+						"posN",
+						"posNave2	abc"
+					],
+					[
+						"digL",
+						"digLetra_Loop"
+					],
+					[
+						"inc",
+						"incloop"
+					]
+				]
+			},
+			"buffers":
+			[
+				{
+					"file": "/C/Users/berse/Desktop/Faculdade/2º semestre/Organização e Arquitetura de Computadores/Simulador/Hello4.asm",
+					"settings":
+					{
+						"buffer_size": 2650,
+						"line_ending": "Unix"
+					}
+				},
+				{
+					"file": "/C/Users/berse/Desktop/Faculdade/2º semestre/Organização e Arquitetura de Computadores/Simulador/spaceWIN.asm",
+					"settings":
+					{
+						"buffer_size": 366665,
+						"line_ending": "Windows"
+					}
+				},
+				{
+					"file": "/C/Users/berse/Desktop/Faculdade/2º semestre/Organização e Arquitetura de Computadores/Simulador/spaceLINUX.asm",
+					"settings":
+					{
+						"buffer_size": 366721,
+						"line_ending": "Windows"
+					}
+				},
+				{
+					"file": "/C/Users/berse/Desktop/Faculdade/2º semestre/Organização e Arquitetura de Computadores/Simulador/TesteCPU.asm",
+					"settings":
+					{
+						"buffer_size": 2816,
+						"line_ending": "Unix"
+					}
+				}
+			],
+			"build_system": "Packages/Assembly ICMC/Assembly ICMC.sublime-build",
+			"command_palette":
+			{
+				"height": 81.0,
+				"selected_items":
+				[
+					[
+						"insta",
+						"Package Control: Install Package"
+					]
+				],
+				"width": 400.0
+			},
+			"console":
+			{
+				"height": 126.0,
+				"history":
+				[
+					"import urllib.request,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+				]
+			},
+			"distraction_free":
+			{
+				"menu_visible": true,
+				"show_minimap": false,
+				"show_open_files": false,
+				"show_tabs": false,
+				"side_bar_visible": false,
+				"status_bar_visible": false
+			},
+			"file_history":
+			[
+				"/C/Users/berse/Desktop/Faculdade/2º semestre/Organização e Arquitetura de Computadores/Simulador/BuscaDoHexa.asm",
+				"/C/Users/berse/Desktop/Faculdade/2º semestre/Organização e Arquitetura de Computadores/Simulador/space2.asm",
+				"/C/Users/berse/Desktop/Faculdade/2º semestre/Organização e Arquitetura de Computadores/Simulador/space22.asm",
+				"/C/Users/berse/Desktop/Faculdade/2º semestre/Organização e Arquitetura de Computadores/Simulador/space23.asm",
+				"/C/Users/berse/Desktop/Faculdade/2º semestre/Organização e Arquitetura de Computadores/Simulador/spaceGIRAR.asm",
+				"/C/Users/berse/Desktop/Faculdade/2º semestre/Organização e Arquitetura de Computadores/Simulador/jogoDaMemoria.asm",
+				"/C/Users/berse/Desktop/Faculdade/2º semestre/Organização e Arquitetura de Computadores/Simulador/test.asm",
+				"/C/Users/berse/Desktop/Faculdade/2º semestre/Organização e Arquitetura de Computadores/Simulador/gregorian.asm",
+				"/C/Users/berse/Desktop/Faculdade/2º semestre/Organização e Arquitetura de Computadores/Simulador/gregorian (1).asm",
+				"/C/Users/berse/Desktop/Faculdade/2º semestre/Organização e Arquitetura de Computadores/Simulador/spaceMENU.asm",
+				"/C/Users/berse/Desktop/Faculdade/2º semestre/Organização e Arquitetura de Computadores/Simulador/Nave11.asm",
+				"/C/Users/berse/Desktop/Faculdade/2º semestre/Organização e Arquitetura de Computadores/Simulador/space.asm",
+				"/C/Users/berse/Desktop/Faculdade/2º semestre/Organização e Arquitetura de Computadores/Simulador/space3.asm",
+				"/C/Users/berse/Desktop/Faculdade/2º semestre/Organização e Arquitetura de Computadores/Simulador/space2.1.mif",
+				"/C/Users/berse/Desktop/Faculdade/2º semestre/Organização e Arquitetura de Computadores/Simulador/space2.1.asm",
+				"/C/Users/berse/Desktop/Faculdade/2º semestre/Organização e Arquitetura de Computadores/Simulador/backup/space2.asm",
+				"/C/Users/berse/Desktop/Faculdade/2º semestre/Organização e Arquitetura de Computadores/Simulador/pacman.asm",
+				"/C/Users/berse/Desktop/Faculdade/2º semestre/Organização e Arquitetura de Computadores/Simulador/Versao_05_2013/Exemplos/pacman.asm",
+				"/D/Simulador/Hello4.asm",
+				"/D/Teste Ambiente/Hello4.asm",
+				"/D/Teste Ambiente/leString.asm",
+				"/D/Teste Ambiente/forca.asm",
+				"/D/Teste Ambiente - Copia/Hello4.asm",
+				"/D/Teste Ambiente/Sublime Text 3/Data/Packages/User/Preferences.sublime-settings",
+				"/D/Teste Ambiente/printForca.asm",
+				"/D/Teste Ambiente/Sublime Text 3/Data/Packages/User/untitled.sublime-build",
+				"/C/Users/CARLOS~1/AppData/Local/Temp/Rar$DRa0.561/Assembly ICMC.sublime-build",
+				"/D/Documentos/USP/Prat_OrgC/Versao_05_2013/32_bits/Forca01.asm",
+				"/C/Users/CARLOS~1/AppData/Local/Temp/Rar$DRa0.040/Completion Rules.tmPreferences",
+				"/C/Users/CARLOS~1/AppData/Local/Temp/Rar$DRa0.959/C++.tmLanguage",
+				"/C/Users/CARLOS~1/AppData/Local/Temp/Rar$DRa0.091/C++.sublime-settings",
+				"/C/Users/CARLOS~1/AppData/Local/Temp/Rar$DRa0.196/C++.sublime-build",
+				"/C/Users/CARLOS~1/AppData/Local/Temp/Rar$DRa0.532/C.tmLanguage",
+				"/C/Users/CARLOS~1/AppData/Local/Temp/Rar$DRa0.207/Batch File.tmLanguage",
+				"/D/Teste Ambiente/Sublime Text 3/Data/Cache/Assembly ICMC/Assembly_ICMC_Syntax.tmLanguage",
+				"/D/Teste Ambiente/Sublime Text 3/Data/Packages/User/Assembly ICMC.sublime-build",
+				"/D/Documentos/USP/Prat_OrgC/Aula_2015-03-04/Hello4.asm",
+				"/D/Teste Ambiente/Hello4.mif",
+				"/D/Teste Ambiente/Versao_05_2013/Exemplos/Hello4.asm"
+			],
+			"find":
+			{
+				"height": 35.0
+			},
+			"find_in_files":
+			{
+				"height": 0.0,
+				"where_history":
+				[
+				]
+			},
+			"find_state":
+			{
+				"case_sensitive": false,
+				"find_history":
+				[
+					"posAlien1",
+					"MoveAlien1_Apaga",
+					"MoveAlien1_Desenha",
+					"Alien1Dead",
+					"MoveAlien1",
+					"tela1Linha0",
+					"tela3Linha0",
+					"Msn6",
+					"Msn5",
+					"MoveAlien1",
+					"605",
+					"Msn1",
+					"650",
+					"Msn1",
+					"sn1",
+					"Msn1",
+					"Msn1:",
+					"Msn1",
+					"3072",
+					"Bullets",
+					"Print_Bullets",
+					"Print_Bullets_Numeros_Fim",
+					"auxDigitoBullets",
+					"Horda",
+					"addBullets",
+					"Horda",
+					"horda",
+					"Horda",
+					"horda",
+					"Reviver_Aliens",
+					"MoveAlien4",
+					"MoveNave_RecalculaPos_Tiro",
+					"MoveNave_RecalculaPos",
+					"MoveNave",
+					"Print_Bullets",
+					"Print_Kills_Numeros_Fim",
+					"auxDigito",
+					"Print_Bullets",
+					"MoveNave_RecalculaPos_Tiro",
+					"MoveNave_RecalculaPos_Fim",
+					"MoveNave_RecalculaPos_Tiro",
+					"MoveNave_RecalculaPos",
+					"MoveNave",
+					"MoveAlien1_RecalculaPos",
+					"MoveAlien1",
+					"MoveTiro2_RecalculaPos",
+					"MoveTiro2",
+					"MoveTiro_Desenha",
+					"MoveTiro_Multi",
+					"MoveTiro_Skip",
+					"MoveTiro_RecalculaPos_Multi",
+					"MoveTiro_Multi",
+					"MoveTiro_RecalculaPos_Multi",
+					"MoveTiro_Multi",
+					"MoveTiro_RecalculaPos_Fim2_Multi",
+					"MoveTiro_RecalculaPos_Multi",
+					"MoveTiro_Multi",
+					"MoveNave_RecalculaPos_Multi",
+					"MoveNave_Multi",
+					"MoveTiro_RecalculaPos_Multi",
+					"MoveTiro_Multi",
+					"MoveNave_Multi",
+					"Loop2",
+					"MoveTiro2",
+					"jmp menu",
+					"MoveTiro_RecalculaPos_Multi",
+					"MoveAlien1_Apaga",
+					"Reviver_Aliens",
+					"inc",
+					"Inc",
+					"inc",
+					"Inc",
+					"inc",
+					"MoveTiro_Apaga",
+					"MoveTiro2_RecalculaPos_Boom",
+					"Msn6",
+					"menu",
+					"MoveTiro_Skip",
+					"MoveTiro",
+					"dirTiro_Recalculapos",
+					"dirTiro",
+					"MoveNave_RecalculaPos_Tiro",
+					"ImprimeStr",
+					"MoveTiro_RecalculaPos",
+					"Erro",
+					"erro",
+					"Erro",
+					"TestaFim",
+					"TestaFim_FimJogo",
+					"MoveNave_RecalculaPos_Fim",
+					"MoveTiro_RecalculaPos",
+					"MoveNave_RecalculaPos",
+					"MoveTiro_RecalculaPos",
+					"MoveNave_Desenha_Fim",
+					"store posAntTiro",
+					"MoveAst",
+					"FlagTiro",
+					"0",
+					"r*",
+					"r3",
+					"r2",
+					"r3"
+				],
+				"highlight": true,
+				"in_selection": false,
+				"preserve_case": false,
+				"regex": false,
+				"replace_history":
+				[
+				],
+				"reverse": false,
+				"show_context": true,
+				"use_buffer2": true,
+				"whole_word": false,
+				"wrap": true
+			},
+			"groups":
+			[
+				{
+					"selected": 2,
+					"sheets":
+					[
+						{
+							"buffer": 0,
+							"file": "/C/Users/berse/Desktop/Faculdade/2º semestre/Organização e Arquitetura de Computadores/Simulador/Hello4.asm",
+							"semi_transient": false,
+							"settings":
+							{
+								"buffer_size": 2650,
+								"regions":
+								{
+								},
+								"selection":
+								[
+									[
+										401,
+										401
+									]
+								],
+								"settings":
+								{
+									"syntax": "Packages/Assembly ICMC/Assembly ICMC.tmLanguage",
+									"translate_tabs_to_spaces": false
+								},
+								"translation.x": 0.0,
+								"translation.y": 57.0,
+								"zoom_level": 1.0
+							},
+							"stack_index": 3,
+							"type": "text"
+						},
+						{
+							"buffer": 1,
+							"file": "/C/Users/berse/Desktop/Faculdade/2º semestre/Organização e Arquitetura de Computadores/Simulador/spaceWIN.asm",
+							"semi_transient": false,
+							"settings":
+							{
+								"buffer_size": 366665,
+								"regions":
+								{
+								},
+								"selection":
+								[
+									[
+										54283,
+										49001
+									]
+								],
+								"settings":
+								{
+									"syntax": "Packages/Assembly ICMC/Assembly ICMC.tmLanguage",
+									"translate_tabs_to_spaces": false
+								},
+								"translation.x": 0.0,
+								"translation.y": 52991.0,
+								"zoom_level": 1.0
+							},
+							"stack_index": 1,
+							"type": "text"
+						},
+						{
+							"buffer": 2,
+							"file": "/C/Users/berse/Desktop/Faculdade/2º semestre/Organização e Arquitetura de Computadores/Simulador/spaceLINUX.asm",
+							"semi_transient": false,
+							"settings":
+							{
+								"buffer_size": 366721,
+								"regions":
+								{
+								},
+								"selection":
+								[
+									[
+										54335,
+										54335
+									]
+								],
+								"settings":
+								{
+									"syntax": "Packages/Assembly ICMC/Assembly ICMC.tmLanguage"
+								},
+								"translation.x": 0.0,
+								"translation.y": 60207.0,
+								"zoom_level": 1.0
+							},
+							"stack_index": 0,
+							"type": "text"
+						},
+						{
+							"buffer": 3,
+							"file": "/C/Users/berse/Desktop/Faculdade/2º semestre/Organização e Arquitetura de Computadores/Simulador/TesteCPU.asm",
+							"semi_transient": false,
+							"settings":
+							{
+								"buffer_size": 2816,
+								"regions":
+								{
+								},
+								"selection":
+								[
+									[
+										0,
+										0
+									]
+								],
+								"settings":
+								{
+									"syntax": "Packages/Assembly ICMC/Assembly ICMC.tmLanguage",
+									"translate_tabs_to_spaces": false
+								},
+								"translation.x": 0.0,
+								"translation.y": 0.0,
+								"zoom_level": 1.0
+							},
+							"stack_index": 2,
+							"type": "text"
+						}
+					]
+				}
+			],
+			"incremental_find":
+			{
+				"height": 27.0
+			},
+			"input":
+			{
+				"height": 0.0
+			},
+			"layout":
+			{
+				"cells":
+				[
+					[
+						0,
+						0,
+						1,
+						1
+					]
+				],
+				"cols":
+				[
+					0.0,
+					1.0
+				],
+				"rows":
+				[
+					0.0,
+					1.0
+				]
+			},
+			"menu_visible": true,
+			"output.exec":
+			{
+				"height": 133.0
+			},
+			"output.find_results":
+			{
+				"height": 0.0
+			},
+			"position": "0,2,3,-1,-1,-1,-1,1089,330,189,1930",
+			"project": "",
+			"replace":
+			{
+				"height": 50.0
+			},
+			"save_all_on_build": true,
+			"select_file":
+			{
+				"height": 0.0,
+				"selected_items":
+				[
+				],
+				"width": 0.0
+			},
+			"select_project":
+			{
+				"height": 0.0,
+				"selected_items":
+				[
+				],
+				"width": 0.0
+			},
+			"select_symbol":
+			{
+				"height": 0.0,
+				"selected_items":
+				[
+				],
+				"width": 0.0
+			},
+			"selected_group": 0,
+			"settings":
+			{
+			},
+			"show_minimap": true,
+			"show_open_files": false,
+			"show_tabs": true,
+			"side_bar_visible": true,
+			"side_bar_width": 150.0,
+			"status_bar_visible": true,
+			"template_settings":
+			{
+			},
+			"window_id": 1,
+			"workspace_name": ""
+		}
+	],
+	"workspaces":
+	{
+		"recent_workspaces":
+		[
+		]
+	}
+}
