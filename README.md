@@ -49,7 +49,7 @@ The game has two game modes: a singleplayer mode and a local multiplayer mode (s
   10) Have a good game :)
   
   ### Linux
-  1) Faça o download do simulador para linux que se encontra na pasta `./Simulator-Linux` ou clique em [DOWNLOAD](https://github.com/MHUSP/projetos-simoes/blob/main/Simulator-Linux/Simulator-Linux.zip?raw=true)
-  2) Extraía a pasta em seu computador
-  3) Siga o tutorial do arquivo "**Dicas_de_como_fazer_tudo.txt**"
-  4) Divirta-se :)
+  1) Download the simulator for windows that is in the folder `./Simulator-Linux` or click on [DOWNLOAD](https://github.com/MHUSP/projetos-simoes/blob/main/Simulator-Linux/Simulator-Linux.zip?raw=true)
+  2) Extract the folder on your computer
+  3) Follow the file tutorial "**Dicas_de_como_fazer_tudo.txt**"
+  4) Have a good game :)
