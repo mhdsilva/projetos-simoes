@@ -14,4 +14,29 @@
 <BR>
 
 ## Getting Started
+O jogo possui dois modos de jogo: um modo singleplayer e outro multiplayer local (ainda em desenvolvimento)
+<BR>
+<BR>
   
+### Singleplayer
+- Neste modo o jogador precisa sobreviver a várias hordas de aliens
+- Sua nave começa com 12 munições, podendo disparar até três tiros por vez
+- Cada horda é composta por 4 aliens diferentes, começa uma nova horda quando os 4 aliens morrerem
+- Cada alien possui uma movimentação própria e, além disso, eles tentarão desviar dos tiros
+- A cada horda a nave receberá mais 8 munições
+- Após a horda 10, os aliens ficarão mais rápidos
+- Após a horda 20, a nave receberá apenas 6 munições por horda
+- Após a horda 30, a nave receberá apenas 5 munições por horda
+- ...
+<BR>
+
+### Multiplayer Local
+- Neste modo, o jogador 1 movimenta uma nave e o jogador 2 movimenta um alien
+- Em desenvolvimento...
+<BR>
+  
+## Instalação
+  ### Windows
+  1) Baixe 
+  
+  ### Linux
