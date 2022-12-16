@@ -43,9 +43,13 @@ O jogo possui dois modos de jogo: um modo singleplayer e outro multiplayer local
   4) Execute o sublime: "sublime_text.exe"
   5) Se ele pedir, NÃO FAÇA O UPDATE!
   6) Vá em File - Open File e volte uma pasta para `../Simulator-Windows`
-  7) Abra o arquivo "spaceWIN.asm"
-  8) Inicie o Simulador com a tecla F7
+  7) Abra o arquivo "**spaceWIN.asm**"
+  8) Inicie o Simulador com a tecla `F7`
   9) Quando o Simulador abrir, aperte a tecla `home` para iniciar o jogo
   10) Divirta-se :)
   
   ### Linux
+  1) Faça o download do simulador para linux que se encontra na pasta `./Simulator-Linux` ou clique em [DOWNLOAD](https://github.com/MHUSP/projetos-simoes/blob/main/Simulator-Linux/Simulator-Linux.zip?raw=true)
+  2) Extraía a pasta em seu computador
+  3) Siga o tutorial do arquivo "**Dicas_de_como_fazer_tudo.txt**"
+  4) Divirta-se :)
