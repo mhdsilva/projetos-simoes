@@ -37,6 +37,8 @@ O jogo possui dois modos de jogo: um modo singleplayer e outro multiplayer local
   
 ## Instalação
   ### Windows
-  1) Faça o download do simulador para windows que se encontra na pasta ./Simulator-Windows ou clique em [DOWNLOAD](https://github.com/MHUSP/projetos-simoes/blob/main/Simulator-Linux/Simulator-Linux.zip?raw=true)
+  1) Faça o download do simulador para windows que se encontra na pasta `./Simulator-Windows` ou clique em [DOWNLOAD](https://github.com/MHUSP/projetos-simoes/blob/main/Simulator-Windows/Simulator-Windows.zip?raw=true)
+  2) Extraía a pasta em seu computador
+  3) 
   
   ### Linux
