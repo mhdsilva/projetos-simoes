@@ -14,39 +14,39 @@
 <BR>
 
 ## Getting Started
-O jogo possui dois modos de jogo: um modo singleplayer e outro multiplayer local (ainda em desenvolvimento)
+The game has two game modes: a singleplayer mode and a local multiplayer mode (still in development)
 <BR>
 <BR>
   
 ### Singleplayer
-- Neste modo o jogador precisa sobreviver a várias hordas de aliens
-- Sua nave começa com 12 munições, podendo disparar até três tiros por vez
-- Cada horda é composta por 4 aliens diferentes, começa uma nova horda quando os 4 aliens morrerem
-- Cada alien possui uma movimentação própria e, além disso, eles tentarão desviar dos tiros
-- A cada horda a nave receberá mais 8 munições
-- Após a horda 10, os aliens ficarão mais rápidos
-- Após a horda 20, a nave receberá apenas 6 munições por horda
-- Após a horda 30, a nave receberá apenas 5 munições por horda
+- In this mode the player needs to survive several hordes of aliens
+- Your spaceship starts with 12 bullets and can fire up to three shots at a time
+- Each horde is composed of 4 different aliens, a new horde starts when the 4 aliens die
+- Each alien has its own movement and, in addition, they will try to dodge the shots
+- For each horde the spaceship will receive 8 more ammunition
+- After horde 10, aliens will get faster
+- After 20 horde, the spaceship will only receive 6 bullets per horde
+- After horde 30, the spaceship will only receive 5 bullets per horde
 - ...
 <BR>
 
 ### Multiplayer Local
-- Neste modo, o jogador 1 movimenta uma nave e o jogador 2 movimenta um alien
-- Em desenvolvimento...
+- In this mode, player 1 moves a spaceship and player 2 moves an alien
+- Under development...
 <BR>
   
-## Instalação
+## Installation
   ### Windows
-  1) Faça o download do simulador para windows que se encontra na pasta `./Simulator-Windows` ou clique em [DOWNLOAD](https://github.com/MHUSP/projetos-simoes/blob/main/Simulator-Windows/Simulator-Windows.zip?raw=true)
-  2) Extraía a pasta em seu computador
-  3) Entre na pasta `../Simulator-Windows/Sublime Text 3`
-  4) Execute o sublime: "sublime_text.exe"
-  5) Se ele pedir, NÃO FAÇA O UPDATE!
-  6) Vá em File - Open File e volte uma pasta para `../Simulator-Windows`
-  7) Abra o arquivo "**spaceWIN.asm**"
-  8) Inicie o Simulador com a tecla `F7`
-  9) Quando o Simulador abrir, aperte a tecla `home` para iniciar o jogo
-  10) Divirta-se :)
+  1) Download the simulator for windows that is in the folder `./Simulator-Windows` or click on [DOWNLOAD](https://github.com/MHUSP/projetos-simoes/blob/main/Simulator-Windows/Simulator-Windows.zip?raw=true)
+  2) Extract the folder on your computer
+  3) Enter the folder `../Simulator-Windows/Sublime Text 3`
+  4) Run the sublime: "sublime_text.exe"
+  5) If it asks, DON'T UPDATE!
+  6) Go to File - Open File and go back one folder to `../Simulator-Windows`
+  7) Open the file "**spaceWIN.asm**"
+  8) Start the Simulator with the key `F7`
+  9) When the Simulator opens, press the key `home` to start the game
+  10) Have a good game :)
   
   ### Linux
   1) Faça o download do simulador para linux que se encontra na pasta `./Simulator-Linux` ou clique em [DOWNLOAD](https://github.com/MHUSP/projetos-simoes/blob/main/Simulator-Linux/Simulator-Linux.zip?raw=true)
