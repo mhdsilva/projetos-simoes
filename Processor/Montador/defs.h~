@@ -101,15 +101,11 @@
 #define NOP_CODE                0
 #define INPUT_CODE              96
 #define OUTPUT_CODE             97
-#define LOADHD_CODE             98
-#define STOREHD_CODE            99
 
 /* Definicoes dos op codes (binarios em strings) */
 
 /* Data Manipulation Instructions: */
 #define LOAD            "110000"
-#define LOADHD          "111011"
-#define STOREHD         "110111"
 #define STORE           "110001"
 #define LOADIMED        "111000"
 #define STOREIMED       "111001"
@@ -118,7 +114,7 @@
 #define MOV             "110011"
 
 /* Peripheric Instructions: */
-#define INPUT	          "111110"
+#define INPUT	        "111110"
 #define OUTPUT          "111111"
 
 /* I/O Instructions: */
@@ -159,7 +155,7 @@
 #define NOP             "000000"
 #define HALT            "001111"
 #define CLEARC          "001000"
-#define BREAKP		      "001110"
+#define BREAKP		"001110"
 
 /* Definicoes das condicoes (binarios em strings) */
 #define NO_COND         "0000"
@@ -185,13 +181,11 @@
 #define LOAD_STR                "LOAD"
 #define LOADIMED_STR            "LOADN"
 #define LOADINDEX_STR           "LOADI"
-#define LOADHD_STR              "LOADHD"
 
 /* STORE */
 #define STORE_STR               "STORE"
 #define STOREIMED_STR           "STOREN"
 #define STOREINDEX_STR          "STOREI"
-#define STOREHD_STR             "STOREHD"
 
 #define MOV_STR                 "MOV"
 #define INCHAR_STR              "INCHAR"
@@ -244,7 +238,7 @@
 #define BLT_STR                 "BLT"
 #define BEG_STR                 "BEG"
 #define BEL_STR                 "BEL"
-#define BO_STR                  "BOV"
+#define BO_STR                  "BO"
 #define BNO_STR                 "BNO"
 
 /* JMP */
@@ -259,7 +253,7 @@
 #define JLT_STR                 "JLE"
 #define JEG_STR                 "JEG"
 #define JEL_STR                 "JEL"
-#define JO_STR                  "JOV"
+#define JO_STR                  "JO"
 #define JNO_STR                 "JNO"
 #define JDZ_STR                 "JDZ"
 #define JN_STR                  "JN"
@@ -277,7 +271,7 @@
 #define CLT_STR                 "CLE"
 #define CEG_STR                 "CEG"
 #define CEL_STR                 "CEL"
-#define CO_STR                  "COV"
+#define CO_STR                  "CO"
 #define CNO_STR                 "CNO"
 #define CDZ_STR                 "CDZ"
 #define CN_STR                  "CN"
@@ -294,7 +288,7 @@
 #define SLT_STR                 "SLT"
 #define SEG_STR                 "SEG"
 #define SEL_STR                 "SEL"
-#define SO_STR                  "SOV"
+#define SO_STR                  "SO"
 #define SNO_STR                 "SNO"
 
 /* Callr e Jmpr */
