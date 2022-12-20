@@ -53,7 +53,7 @@ Do todos os comandos...
 //#define sDATA_OUT 1
 
 // Opcodes das Instrucoes:
-// Data Manipulation: 27
+// Data Manipulation:
 #define LOAD                                                                   \
   48 // "110000"; -- LOAD Rx END  -- Rx <- M[END]  Format: < inst(6) | Rx(3) |
      // xxxxxxx >  + 16bit END
@@ -69,13 +69,14 @@ Do todos os comandos...
 #define STOREI                                                                 \
   61 // "111101"; -- STORE Rx Ry  -- M[Rx] <- Ry	Format: < inst(6) |
      // Rx(3) | Ry(3) | xxxx >
-#define MOV 51 // "110011"; -- MOV Rx Ry    -- Rx <- Ry	  	Format: < inst(6) |
+#define MOV                                                                    \
+  51 // "110011"; -- MOV Rx Ry    -- Rx <- Ry	  	Format: < inst(6) |
      // Rx(3) | Ry(3) | xxxx >
-
-#define LOADHD  59 // "111011"; -- LOAD Rx END  -- Rx <- M[END]  Format: < inst(6) | Rx(3) |
-     // xxxxxxx >  + 16bit END
-#define STOREHD 55                                                              
-   // 110111"; -- STOREHD END Rx  -- HD[END] <- Rx  Format: < inst(6) | Rx(3) |
+#define LOADHD                                                                 \
+  59 // "111011"; -- LOADHD Rx END  -- Rx <- HD[END]  Format: < inst(6) | Rx(3) |
+     // xxxxxxx >  +  16bits END
+#define STOREHD                                                                 \
+  55 // "110111"; -- STOREHD END Rx  -- HD[END] <- Rx  Format: < inst(6) | Rx(3) |
      // xxxxxxx >  +  16bits END
 
 
@@ -413,9 +414,8 @@ loop:
 
     // Case das instrucoes
     opcode = pega_pedaco(IR, 15, 10);
-    
+
     switch (opcode) {
-      
     case INCHAR:
       // TODO: entrada teclado
       // TECLADO = getchar();
@@ -467,9 +467,7 @@ loop:
     case LOADHD:
       // MAR = HD[PC];
       // PC++;
-      
-      selM1 = sPC;
-      RW = 0;
+      RWHD = 0;
       LoadMAR = 1;
       IncPC = 1;
       // -----------------------------
@@ -490,9 +488,8 @@ loop:
     case STOREHD:
       // MAR = HD[PC];
       // PC++;
-      
-      selM1 = sPC;
-      RW = 0;
+      // selM3 = ry;
+      RWHD = 0;
       LoadMAR = 1;
       IncPC = 1;
       // -----------------------------
@@ -856,11 +853,9 @@ loop:
 
     case LOADHD: // pronto
       // reg[rx] = HD[MAR];
-     
       RWHD = 0;
       selM2 = sDATA_OUT_HD;
       LoadReg[rx] = 1;
-      
       // -----------------------------
       state = STATE_FETCH;
       break;
@@ -881,8 +876,6 @@ loop:
       // selM1 = sMAR;
       RWHD = 1;
       selM3 = rx;
-    
-      
       // selM5 = sM3;
 
       // -----------------------------
@@ -980,9 +973,8 @@ loop:
   if (RW == 0)
     DATA_OUT = MEMORY[M1]; // Tem que vir antes do M2 que usa DATA_OUT
   if (RWHD == 0)
-    
     DATA_OUT_HD = HD[MAR]; // Tem que vir antes do M2 que usa DATA_OUT_HD
-    
+
   // Selecao do Mux3  --> Tem que vir antes da ULA e do M5
   // Converte o vetor FR para int
   // TODO talvez fazer isso depois da operação da ula?
@@ -1129,9 +1121,9 @@ void le_arquivo_hd(void) {
     }
 
     //fclose(stream);
-  
+    printf("A");
     stream = fopen("hd.txt", "r");
-    
+    printf("B");
   }
 
   char linha[110];
